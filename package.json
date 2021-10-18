@@ -1,0 +1,33 @@
+{
+  "name": "week4-ABJM",
+  "version": "1.0.0",
+  "description": "## Roles:",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open",
+    "dev": "nodemon -r -L dotenv/config server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fac22/week4-ABJM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fac22/week4-ABJM/issues"
+  },
+  "homepage": "https://github.com/fac22/week4-ABJM#readme",
+  "devDependencies": {
+    "cypress": "^8.6.0",
+    "eslint": "^8.0.1",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  }
+}
