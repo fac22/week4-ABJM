@@ -6,6 +6,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
   name TEXT NOT NULL,
+  password TEXT NOT NULL,
   avatar BYTEA NOT NULL
   
 );
@@ -20,6 +21,7 @@ INSERT INTO users ( email, name, avatar) VALUES
 (
   'test@gmail.com',
   'Initial User',
+  'Password123',
   'http://placekitten.com/200/300'
 );
 
