@@ -3,12 +3,12 @@
 # stop script when an error occurs
 set -e
 
-psql -q -c "CREATE USER jam_board_user SUPERUSER PASSWORD 'pass123'"
-echo "Created Postgres user 'jam_board_user'"
+psql -q -c "CREATE USER recipe_board_user SUPERUSER PASSWORD 'pass123'"
+echo "Created Postgres user 'recipe_board_user'"
 
-psql -q -c "CREATE DATABASE jam_board WITH OWNER jam_board_user"
-echo "Created Postgres database 'jam_board"
+psql -q -c "CREATE DATABASE recipe_board WITH OWNER recipe_board_user"
+echo "Created Postgres database 'recipe_board"
 
-DB_URL="postgres://jam_board_user:pass123@localhost:5432/jam_board"
-echo "DATABASE_URL='postgres://jam_board_user:pass123@localhost:5432/jam_board'\nCOOKIE_SECRET='thisisaridiculouscookiesecretandshouldnotbeusedinproduction'" > .env
+DB_URL="postgres://recipe_board_user:pass123@localhost:5432/recipe_board"
+echo "DATABASE_URL='postgres://recipe_board_user:pass123@localhost:5432/recipe_board'\nCOOKIE_SECRET='thisisaridiculouscookiesecretandshouldnotbeusedinproduction'" > .env
 echo "Created .env containing DATABASE_URL & COOKIE_SECRET"

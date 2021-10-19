@@ -1,6 +1,6 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, sessions CASCADE;
+DROP TABLE IF EXISTS users, sessions, recipes CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -16,8 +16,16 @@ CREATE TABLE sessions (
    data JSON NOT NULL
 );
   
-  
-INSERT INTO users ( email, name, avatar) VALUES
+
+CREATE TABLE recipes (
+   pid SERIAL PRIMARY KEY,
+   title TEXT NOT NULL,
+   ingredients TEXT NOT NULL,
+   instructions TEXT NOT NULL,
+   user_id INTEGER REFERENCES users(id)
+);
+
+INSERT INTO users ( email, name, password, avatar) VALUES
 (
   'test@gmail.com',
   'Initial User',
@@ -29,6 +37,15 @@ INSERT INTO sessions (sid, data) VALUES
 (
   '1234',
   '{"test":"testing cookie"}'
+);
+
+INSERT INTO recipes (title, ingredients, instructions, user_id) VALUES
+(
+  'Strawberry Jam',
+  '1kg strawberries, 1kg jam sugar',
+  'Cut up the strawberries, mix with the jam sugar. Boil for 5 minutes. 
+  Take a setting test on a cold plate. Fill jam into sterilised jars and close immediately.',
+  1
 );
 
 COMMIT;
