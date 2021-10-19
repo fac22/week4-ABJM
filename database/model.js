@@ -8,12 +8,12 @@ function getUser(email) {
   return db.query(SELECT_USER, [email]).then((result) => result.rows[0]);
 }
 
-function createUser(name, email, hash) {
-  const INSERT_USER = `INSERT INTO users (name, email, password) VALUES ($1, $2, $3) 
+function createUser(name, email, hash, avatar) {
+  const INSERT_USER = `INSERT INTO users (name, email, password, avatar) VALUES ($1, $2, $3, $4) 
   RETURNING id, name, email;`;
-  return db.query(INSERT_USER, [name, email, hash]).then((result) => {
-    console.log('inserted user');
-    result.rows[0];
+  return db.query(INSERT_USER, [name, email, hash, avatar]).then((result) => {
+    console.log('model.js:', avatar);
+    return result.rows[0];
   });
 }
 

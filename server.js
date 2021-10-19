@@ -47,6 +47,7 @@ server.post('/signUp', upload.single('avatar'), (request, response) => {
       .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
   } else {
     const { name, email, password } = request.body;
+    console.log(file.buffer);
     auth
       .createUser(name, email, password, file.buffer)
       .then(auth.saveUserSession)
