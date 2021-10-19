@@ -2,9 +2,7 @@ const model = require('../database/model.js');
 const { buildPage } = require('../template.js');
 
 function get(request, response) {
-	// sid
-	// Login, signup
-	// Logout
+  response.send('hello World');
 }
 
 module.exports = { get };

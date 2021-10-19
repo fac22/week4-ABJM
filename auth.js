@@ -1,13 +1,20 @@
-const crypto = require("crypto");
-const bcrypt = require("bcryptjs");
-const model = require("./database/model");
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
+const model = require('./database/model');
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
   maxAge: 600000,
-  sameSite: "lax",
+  sameSite: 'lax',
   signed: true,
 };
+
+function createUser(name, email, password) {
+  return bcrypt.hash(password, 10).then((hash) => {
+    model.createUser(name, email, hash);
+    console.log(name, email, hash);
+  });
+}
 
 function verifyUser(email, password) {
   return model.getUser(email).then((user) => {
@@ -22,14 +29,8 @@ function verifyUser(email, password) {
   });
 }
 
-function createUser(name, email, password) {
-  return bcrypt
-    .hash(password, 10)
-    .then((hash) => model.createUser(name, email, hash));
-}
-
 function saveUserSession(user) {
-  const sid = crypto.randomBytes(18).toString("base64");
+  const sid = crypto.randomBytes(18).toString('base64');
   return model.createSession(sid, { user });
 }
 
