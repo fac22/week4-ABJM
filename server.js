@@ -43,8 +43,8 @@ server.post('/recipePost', recipePost.post);
 server.get('/logIn', logIn.get);
 server.post('/logIn', logIn.post);
 
-/*server.get('/logOut', logOut.get);
-server.post('/logOut', logOut.post);*/
+// server.get('/logOut', logOut.get);
+server.post('/logOut', logOut.post);
 
 server.get('/signUp', signUp.get);
 server.post('/signUp', signUp.post);
