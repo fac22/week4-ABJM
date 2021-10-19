@@ -4,10 +4,11 @@ const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000;
 
 const home = require('./routes/home.js');
-const jamAll = require('./routes/jamAll.js');
-const jamDelete = require('./routes/jamDelete.js');
-const jamEdit = require('./routes/jamEdit.js');
-const jamMy = require('./routes/jamMy.js');
+const recipesAll = require('./routes/recipesAll.js');
+const recipeDelete = require('./routes/recipeDelete.js');
+const recipeEdit = require('./routes/recipeEdit.js');
+const recipesMine = require('./routes/recipesMine.js');
+const recipePost = require('./routes/recipePost.js');
 const logIn = require('./routes/logIn.js');
 const logOut = require('./routes/logOut.js');
 const signUp = require('./routes/signUp.js');
@@ -22,31 +23,36 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
 
-server.get('/jamAll', jamAll.get);
-server.post('/jamAll', jamAll.post);
+/*server.get('/recipesAll', recipesAll.get);
+server.post('/recipesAll', recipesAll.post);
 
-server.get('/jamDelete', jamDelete.get);
-server.post('/jamDelete', jamDelete.post);
+server.get('/recipeDelete', recipeDelete.get);
+server.post('/recipeDelete, recipeDelete.post);
 
-server.get('/jamEdit', jamEdit.get);
-server.post('/jamEdit', jamEdit.post);
+server.get('/recipeEdit', recipeEdit.get);
+server.post('/recipeEdit', recipeEdit.post);
 
-server.get('/jamMy', jamMy.get);
-server.post('/jamMy', jamMy.post);
+server.get('/recipesMine', recipesMine.get);
+server.post('/recipesMine', recipesMine.post);
+
+server.get('/recipePost', recipePost.get);
+server.post('/recipePost', recipePost.post);
+
+*/
 
 server.get('/logIn', logIn.get);
 server.post('/logIn', logIn.post);
 
-server.get('/logOut', logOut.get);
-server.post('/logOut', logOut.post);
+/*server.get('/logOut', logOut.get);
+server.post('/logOut', logOut.post);*/
 
 server.get('/signUp', signUp.get);
 server.post('/signUp', signUp.post);
 
-server.get('/userDelete', userDelete.get);
+/*server.get('/userDelete', userDelete.get);
 server.post('/userDelete', userDelete.post);
 
 server.get('/userEdit', userEdit.get);
-server.post('/userEdit', userEdit.post);
+server.post('/userEdit', userEdit.post);*/
 
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
