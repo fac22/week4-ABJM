@@ -17,9 +17,9 @@ const userEdit = require('./routes/userEdit.js');
 const multer = require('multer');
 const server = express();
 
-const auth = require('../auth.js');
+const auth = require('./auth.js');
 
-const { buildPage } = require('../template.js');
+const { buildPage } = require('./template.js');
 
 const upload = multer();
 const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
