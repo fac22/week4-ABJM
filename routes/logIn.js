@@ -7,7 +7,7 @@ function get(request, response) {
   const title = 'Log in';
   const form = /*html*/ `
 		<h1>Log in</h1>
-		<form action="/log-in" method="POST">
+		<form action="/logIn" method="POST">
         <div>
 		<label for="email">Email<span aria-hidden="true">*</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required>
