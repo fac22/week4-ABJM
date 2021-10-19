@@ -1,14 +1,14 @@
-const auth = require('../auth.js');
-const { buildPage } = require('../template.js');
+const auth = require("../auth.js");
+const { buildPage } = require("../template.js");
 
 function get(request, response) {
   //form
 
   response.send(
     buildPage(
-      'B-JAM Sign up',
+      "B-JAM Sign up",
       /*html*/ `
-	<form action = "sign-up" enctype = "multipart/form-data" method="POST">
+	<form action = "signUp"  method="POST">
 	<div>
 		<label for="name">Name<span aria-hidden="true">*</span></label>
 		<p id="nameRequirements" class="requirements">
@@ -43,13 +43,14 @@ function get(request, response) {
 }
 
 function post(request, response) {
-  const { name, email, password, avatar } = request.body;
+  const { name, email, password } = request.body;
+  console.log(request.body);
   auth
-    .createUser(name, email, password, avatar)
+    .createUser(name, email, password)
     .then(auth.saveUserSession)
     .then((sid) => {
-      response.cookie('name', sid, auth.COOKIE_OPTIONS);
-      response.redirect('/');
+      response.cookie("name", sid, auth.COOKIE_OPTIONS);
+      response.redirect("/");
     })
     .catch(() => {
       response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
