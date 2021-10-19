@@ -11,31 +11,30 @@ function get(request, response) {
 	<form action = "sign-up" enctype = "multipart/form-data" method="POST">
 	<div>
 		<label for="name">Name<span aria-hidden="true">*</span></label>
-		<div id="nameRequirements" class="requirements">
+		<p id="nameRequirements" class="requirements">
         	Name must be at least 2 characters
-        	long.
-    	</div>
+        	long.</p>
 		<input type="text" id="name" name="name" aria-describedby="nameRequirements nameError" minlength="2" required=""
         	placeholder="Please enter your name">
-		</div>
-		<div>
-			<label for="email">Email<span aria-hidden="true">*</span></label>
-			<input type="email" id="email" name="email" placeholder="Enter your email" required
+	</div>
+	<div>
+		<label for="email">Email<span aria-hidden="true">*</span></label>
+		<input type="email" id="email" name="email" placeholder="Enter your email" required
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$">
-		</div>
-		<div>
-			<label for="password">Password<span aria-hidden="true">*</span></label>
-			<div id="passwordRequirements" class="requirements">
+	</div>	
+	<div>
+		<label for="password">Password<span aria-hidden="true">*</span></label>
+		<p id="passwordRequirements" class="requirements">
         Passwords must be at least 5 characters
         long.
-      		</div>
-			<input placeholder="Enter your password" type="password" id="password" name="password"
+      		</p>
+		<input placeholder="Enter your password" type="password" id="password" name="password"
 			aria-describedby="passwordError passwordRequirements" required="" minlength="5">
-		</div>
-		<div>
+	</div>
+	<div>
 		<label for="avatar">Profile Image</label>
 		<input type="file" id="avatar" name="avatar">
-		</div>
+	</div>
 		<button>Sign up</button>
 	</form>
 	`
