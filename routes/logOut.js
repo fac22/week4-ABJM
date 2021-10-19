@@ -3,9 +3,14 @@ const template = require('../template');
 
 function post(request, response) {
 	// sid
+	const sid = request.signedCookies.sid;
 	// delete session
-	// clear cookie
-	// redirect home
+	model.deleteSession(sid).then(() => {
+		// clear cookie
+		response.clearCookie('sid');
+		// redirect home
+		response.redirect('/');
+	});
 }
 
 module.exports = { post };

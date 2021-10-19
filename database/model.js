@@ -16,4 +16,9 @@ function createSession(sid, json) {
     .then((response) => response.rows[0].sid);
 }
 
-module.exports = { getUser, createSession };
+function deleteSession(sid) {
+	const DELETE_SESSION = 'DELETE FROM sessions WHERE sid=$1';
+	return db.query(DELETE_SESSION, [sid]);
+}
+
+module.exports = { getUser, createSession, deleteSession };
