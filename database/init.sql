@@ -6,8 +6,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
   name TEXT NOT NULL,
-  password TEXT NOT NULL,
-  avatar BYTEA NOT NULL
+  password TEXT NOT NULL
+  -- avatar BYTEA
   
 );
 
@@ -25,12 +25,12 @@ CREATE TABLE recipes (
    user_id INTEGER REFERENCES users(id)
 );
 
-INSERT INTO users ( email, name, password, avatar) VALUES
+INSERT INTO users ( email, name, password) VALUES
 (
   'test@gmail.com',
   'Initial User',
-  'Password123',
-  'http://placekitten.com/200/300'
+  'Password123'
+  -- 'http://placekitten.com/200/300'
 );
 
 INSERT INTO sessions (sid, data) VALUES

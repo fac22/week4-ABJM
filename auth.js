@@ -22,10 +22,10 @@ function verifyUser(email, password) {
   });
 }
 
-function createUser(name, email, password, avatar) {
+function createUser(name, email, password) {
   return bcrypt
     .hash(password, 10)
-    .then((hash) => model.createUser(name, email, hash, avatar));
+    .then((hash) => model.createUser(name, email, hash));
 }
 
 function saveUserSession(user) {
