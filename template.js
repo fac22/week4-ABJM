@@ -2,7 +2,7 @@ const logOut = require('./routes/logOut');
 // Can attach this to a log-out button that we can see on every page
 
 function buildPage(title, content) {
-	return /*html*/ `<!DOCTYPE html>
+  return /*html*/ `<!DOCTYPE html>
     <html lang="en">
     <head>
     <meta charset="UTF-8" />

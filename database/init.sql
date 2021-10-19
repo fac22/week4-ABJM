@@ -6,8 +6,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
   name TEXT NOT NULL,
-  password TEXT NOT NULL
-  -- avatar BYTEA
+  password TEXT NOT NULL,
+  avatar BYTEA
   
 );
 
@@ -30,7 +30,6 @@ INSERT INTO users ( email, name, password) VALUES
   'test@gmail.com',
   'Initial User',
   'Password123'
-  -- 'http://placekitten.com/200/300'
 );
 
 INSERT INTO sessions (sid, data) VALUES

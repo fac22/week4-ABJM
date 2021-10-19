@@ -9,10 +9,10 @@ const COOKIE_OPTIONS = {
   signed: true,
 };
 
-function createUser(name, email, password) {
+function createUser(name, email, password, avatar) {
   return bcrypt.hash(password, 10).then((hash) => {
-    model.createUser(name, email, hash);
-    console.log(name, email, hash);
+    console.log('auth.js:', avatar);
+    model.createUser(name, email, hash, avatar);
   });
 }
 
