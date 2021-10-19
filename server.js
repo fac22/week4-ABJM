@@ -14,14 +14,51 @@ const logOut = require('./routes/logOut.js');
 const signUp = require('./routes/signUp.js');
 const userDelete = require('./routes/userDelete.js');
 const userEdit = require('./routes/userEdit.js');
-
+const multer = require('multer');
 const server = express();
+
+const auth = require('../auth.js');
+
+const { buildPage } = require('../template.js');
+
+const upload = multer();
+const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
+const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static('./public'));
 server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
+
+server.post('/signUp', upload.single('avatar'), (request, response) => {
+  const file = request.file;
+
+  // file.mimetype tells us what kind of file it was
+  if (!ALLOWED_TYPES.includes(file.mimetype)) {
+    response
+      .status(400)
+      .send('<h1>File upload error</h1><p>Please upload an image file</p>');
+  }
+  // file.size tells us how big the file was (in bytes)
+  if (file.size > MAX_SIZE) {
+    response
+      .status(400)
+      .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
+  } else {
+    const { name, email, password } = request.body;
+    auth
+      .createUser(name, email, password, file.buffer)
+      .then(auth.saveUserSession)
+      .then((sid) => {
+        response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+        response.redirect('/');
+      })
+      .catch(() => {
+        response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
+      });
+  }
+});
 
 /*server.get('/recipesAll', recipesAll.get);
 server.post('/recipesAll', recipesAll.post);
@@ -47,7 +84,7 @@ server.post('/logIn', logIn.post);
 server.post('/logOut', logOut.post);
 
 server.get('/signUp', signUp.get);
-server.post('/signUp', signUp.post);
+//server.post('/signUp', signUp.post);
 
 /*server.get('/userDelete', userDelete.get);
 server.post('/userDelete', userDelete.post);
