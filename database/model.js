@@ -1,4 +1,4 @@
-const db = require('./connection.js');
+const db = require("./connection.js");
 
 function getUser(email) {
   const SELECT_USER = `
@@ -8,14 +8,14 @@ function getUser(email) {
 }
 
 function getAvatar(id) {
-  return db.query('SELECT avatar FROM users WHERE id=?', id);
+  return db.query("SELECT avatar FROM users WHERE id=?", id);
 }
 
 function createUser(name, email, hash, avatar) {
   const INSERT_USER = `INSERT INTO users (name, email, password, avatar) VALUES ($1, $2, $3, $4) 
   RETURNING id, name, email;`;
   return db.query(INSERT_USER, [name, email, hash, avatar]).then((result) => {
-    console.log('model.js:', avatar);
+    console.log("model.js:", avatar);
     return result.rows[0];
   });
 }
@@ -29,7 +29,7 @@ function createSession(sid, json) {
 }
 
 function deleteSession(sid) {
-  const DELETE_SESSION = 'DELETE FROM sessions WHERE sid=$1';
+  const DELETE_SESSION = "DELETE FROM sessions WHERE sid=$1";
   return db.query(DELETE_SESSION, [sid]);
 }
 
@@ -41,6 +41,10 @@ function getSession(sid) {
   });
 }
 
+function getUsers() {
+  return db.query("SELECT id, email, password, name, avatar FROM users");
+}
+
 module.exports = {
   getUser,
   getAvatar,
@@ -48,4 +52,5 @@ module.exports = {
   createSession,
   deleteSession,
   getSession,
+  getUsers,
 };

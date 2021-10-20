@@ -25,11 +25,12 @@ CREATE TABLE recipes (
    user_id INTEGER REFERENCES users(id)
 );
 
-INSERT INTO users ( email, name, password) VALUES
+INSERT INTO users ( email, name, password, avatar) VALUES
 (
   'test@gmail.com',
   'Initial User',
-  'Password123'
+  'Password123',
+  ''
 );
 
 INSERT INTO sessions (sid, data) VALUES
