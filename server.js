@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000;
 
 const home = require('./routes/home.js');
-
+const recipeWrite = require('./routes/recipeWrite.js');
 
 const server = express();
 
@@ -27,9 +27,6 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
 
-
-
-
 server.get('/recipeWrite', recipeWrite.get);
 server.post('/recipeWrite', recipeWrite.post);
 
@@ -49,7 +46,6 @@ server.post('/recipeWrite', recipeWrite.post);
 
 // server.get('/recipePost', recipePost.get);
 // server.post('/recipePost', recipePost.post);
-
 
 server.get('/logIn', logIn.get);
 server.post('/logIn', logIn.post);

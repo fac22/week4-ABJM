@@ -3,12 +3,12 @@ const auth = require('../auth.js');
 const { buildPage } = require('../template.js');
 
 function get(request, response) {
-	//form
+  //form
 
-	response.send(
-		buildPage(
-			'B-JAM Sign up',
-			/*html*/ `
+  response.send(
+    buildPage(
+      'B-JAM Sign up',
+      /*html*/ `
 	
 	<!--<form action="/signUp" enctype="multipart/form-data" method="post">-->
 	<form action="/signUp" method="post">
@@ -41,8 +41,23 @@ function get(request, response) {
 		<button>Sign up</button>
 	</form>
 	`
-		)
-	);
+    )
+  );
 }
 
-module.exports = { get };
+function post(request, response) {
+  const { email, password, name, avatar } = request.body;
+  auth
+    .createUser(name, email, password, avatar)
+    .then(auth.saveUserSession)
+    .then((sid) => {
+      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+      response.redirect('/');
+    })
+    .catch((error) => {
+      console.error(error);
+      response.send(buildPage(`Error`, `<h2>Couldn't sign up, sorry</h2>`));
+    });
+}
+
+module.exports = { get, post };

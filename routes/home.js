@@ -1,12 +1,9 @@
 const model = require('../database/model.js');
 const { buildPage } = require('../template.js');
 
-
-
 function get(request, response) {
-	const sid = request.signedCookies.sid;
-	const title = `B-JAM Home`;
-
+  const sid = request.signedCookies.sid;
+  const title = `B-JAM Home`;
 
   return model
     .showRecipes()
@@ -44,10 +41,10 @@ function get(request, response) {
             return /*html*/ `
             <h2> Happy to see you again🔆</h2>
             <section>
-              <a>My profile</a>
-              <a>Logout</a>
-              <a>Show my recipes</a>
-              <a>Go to all recipes</a>
+              <a href="/userProfile">My profile</a>
+              <a href="/logOut">Logout</a>
+              <a href="/recipesMine">Show my recipes</a>
+              <a href="/recipesAll">Go to all recipes</a>
               <a href="/recipeWrite">Write a new recipe</a>
 
             </section>
