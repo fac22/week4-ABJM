@@ -38,8 +38,28 @@ function getSession(sid) {
 }
 
 function showRecipes() {
-  const query = `SELECT title, ingredients, instructions FROM recipes`;
+  const query = `SELECT 
+  recipes.title, 
+  recipes.ingredients, 
+  recipes.instructions,
+  users.name
+FROM recipes 
+JOIN users 
+ON recipes.user_id = users.id`;
   return db.query(query).then((result) => result.rows);
+}
+
+function showMyRecipes(email) {
+  const query = `SELECT 
+  recipes.title, 
+  recipes.ingredients, 
+  recipes.instructions,
+  users.name
+FROM recipes 
+JOIN users 
+ON recipes.user_id = users.id
+WHERE email = $1`;
+  return db.query(query, [email]).then((result) => result.rows);
 }
 
 module.exports = {
@@ -49,4 +69,5 @@ module.exports = {
   deleteSession,
   getSession,
   showRecipes,
+  showMyRecipes,
 };
