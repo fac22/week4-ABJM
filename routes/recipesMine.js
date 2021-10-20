@@ -22,7 +22,7 @@ function get(request, response) {
             <p>Author: ${recipe.name}</p>
             <ul>
               <li>Ingredients: ${recipe.ingredients}</li>
-              <li>Instructions: <${recipe.instructions}/li>
+              <li>Instructions: ${recipe.instructions}</li>
             </ul>
             </article>
             `
@@ -30,7 +30,8 @@ function get(request, response) {
 				.join('');
 		})
 		.then(recipeList => {
-			response.send(buildPage(title, recipeList));
+			const page = `<a href="/">Go Home</a> ${recipeList}`;
+			response.send(buildPage(title, page));
 		})
 		.catch(error => {
 			console.error(error);
