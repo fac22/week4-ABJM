@@ -21,9 +21,9 @@ const auth = require('./auth.js');
 
 const { buildPage } = require('./template.js');
 
-const upload = multer();
-const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
-const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
+// const upload = multer();
+// const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
+// const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static('./public'));
@@ -31,34 +31,36 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
 
-server.post('/signUp', upload.single('avatar'), (request, response) => {
+// upload.single('avatar'),
+
+server.post('/signUp', (request, response) => {
   const file = request.file;
 
-  // file.mimetype tells us what kind of file it was
-  if (!ALLOWED_TYPES.includes(file.mimetype)) {
-    response
-      .status(400)
-      .send('<h1>File upload error</h1><p>Please upload an image file</p>');
-  }
-  // file.size tells us how big the file was (in bytes)
-  if (file.size > MAX_SIZE) {
-    response
-      .status(400)
-      .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
-  } else {
-    const { name, email, password } = request.body;
-    console.log(file.buffer);
-    auth
-      .createUser(name, email, password, file.buffer)
-      .then(auth.saveUserSession)
-      .then((sid) => {
-        response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-        response.redirect('/');
-      })
-      .catch(() => {
-        response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
-      });
-  }
+  // // file.mimetype tells us what kind of file it was
+  // if (!ALLOWED_TYPES.includes(file.mimetype)) {
+  //   response
+  //     .status(400)
+  //     .send('<h1>File upload error</h1><p>Please upload an image file</p>');
+  // }
+  // // file.size tells us how big the file was (in bytes)
+  // if (file.size > MAX_SIZE) {
+  //   response
+  //     .status(400)
+  //     .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
+  // } else {
+  const { name, email, password } = request.body;
+  // console.log(file.buffer);
+  auth
+    .createUser(name, email, password)
+    .then(auth.saveUserSession)
+    .then((sid) => {
+      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+      response.redirect('/');
+    })
+    .catch(() => {
+      response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
+    });
+  // }
 });
 
 /*server.get('/recipesAll', recipesAll.get);
