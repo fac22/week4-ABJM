@@ -32,7 +32,7 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get("/", home.get);
 
-server.post("/signUp", upload.single("avatar"), (request, response) => {
+server.post("/", upload.single("avatar"), (request, response) => {
   const file = request.file;
 
   // file.mimetype tells us what kind of file it was

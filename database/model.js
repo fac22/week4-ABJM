@@ -42,7 +42,9 @@ function getSession(sid) {
 }
 
 function getUsers() {
-  return db.query("SELECT id, email, password, name, avatar FROM users");
+  return db
+    .query("SELECT id, email, password, name, avatar FROM users")
+    .then((result) => result.rows);
 }
 
 module.exports = {
