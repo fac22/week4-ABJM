@@ -12,10 +12,11 @@ function get(request, response) {
         .map(
           (recipe) => /*html*/ `
     <article>
+    <h3>${recipe.title}</h3>
+    <p>Author: ${recipe.name}</p>
     <ul>
-    <li>${recipe.title}</li>
-    <li>${recipe.ingredients}</li>
-    <li><${recipe.instructions}/li>
+    <li>Ingredients: ${recipe.ingredients}</li>
+    <li>Instructions: <${recipe.instructions}/li>
     </ul>
     </article>
     `
