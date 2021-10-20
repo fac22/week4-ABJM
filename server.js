@@ -64,7 +64,8 @@ server.post('/signUp', (request, response) => {
 	// }
 });
 
-/*server.get('/recipesAll', recipesAll.get);
+server.get('/recipesAll', recipesAll.get);
+/*
 server.post('/recipesAll', recipesAll.post);
 
 server.get('/recipeDelete', recipeDelete.get);
