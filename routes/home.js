@@ -15,30 +15,31 @@ const { buildPage } = require('../template.js');
 // 4. Go to all recipes
 
 function get(request, response) {
-  const sid = request.signedCookies.sid;
-  const title = `B-JAM Home`;
+	const sid = request.signedCookies.sid;
+	const title = `B-JAM Home`;
 
-  if (!sid) {
-    const content = /*html*/ `
+	if (!sid) {
+		const content = /*html*/ `
 		<h1>Welcome to B-Jam Recipes🍓🥕</h1>
 		<div>
 		<a href="/signUp">Sign up</a>
 		<a href="/logIn">Log in</a>
 		</div>
 		`;
-    response.send(buildPage(title, content));
-  } else {
-    const content = /*html*/ `
+		response.send(buildPage(title, content));
+	} else {
+		const content = /*html*/ `
 		<h1>Welcome to B-Jam Recipes🍓🥕</h1>
 		<div>
-		<a href="/userProfile">My Profile</a>
-		<a href="/logOut">Log out</a>
-		<a href="/recipesMine">Show my recipes</a>
-		<a href="/recipesAll">Go to all recipes</a>
+		<p><a href="/userProfile">My Profile</a></p>
+		<p><a href="/logOut">Log out</a></p>
+		<p><a href="/recipesMine">Show my recipes</a></p>
+		<p><a href="/recipesAll">Go to all recipes</a></p>
+		<p><a href="/recipeWrite">Write a new recipe</a></p>
 		</div>
 		`;
-    response.send(buildPage(title, content));
-  }
+		response.send(buildPage(title, content));
+	}
 }
 
 module.exports = { get };

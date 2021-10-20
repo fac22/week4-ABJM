@@ -34,7 +34,7 @@ server.get('/', home.get);
 // upload.single('avatar'),
 
 server.post('/signUp', (request, response) => {
-	const file = request.file;
+	// const file = request.file;
 
 	// // file.mimetype tells us what kind of file it was
 	// if (!ALLOWED_TYPES.includes(file.mimetype)) {
@@ -49,13 +49,14 @@ server.post('/signUp', (request, response) => {
 	//     .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
 	// } else {
 	const { name, email, password } = request.body;
+	console.log(name);
 	// console.log(file.buffer);
 	auth
 		.createUser(name, email, password)
 		.then(auth.saveUserSession)
 		.then(sid => {
 			response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-			response.redirect('/');
+			response.redirect('/recipeWrite');
 		})
 		.catch(() => {
 			response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));

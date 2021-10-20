@@ -3,14 +3,15 @@ const auth = require('../auth.js');
 const { buildPage } = require('../template.js');
 
 function get(request, response) {
-  //form
+	//form
 
-  response.send(
-    buildPage(
-      'B-JAM Sign up',
-      /*html*/ `
+	response.send(
+		buildPage(
+			'B-JAM Sign up',
+			/*html*/ `
 	
-	<form action="signUp" enctype="multipart/form-data" method="post">
+	<!--<form action="/signUp" enctype="multipart/form-data" method="post">-->
+	<form action="/signUp" method="post">
 	<div>
 		<label for="name">Name<span aria-hidden="true">*</span></label>
 		<p id="nameRequirements" class="requirements">
@@ -40,8 +41,8 @@ function get(request, response) {
 		<button>Sign up</button>
 	</form>
 	`
-    )
-  );
+		)
+	);
 }
 
 module.exports = { get };
