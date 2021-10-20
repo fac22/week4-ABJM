@@ -18,6 +18,7 @@ const multer = require('multer');
 const server = express();
 
 const auth = require('./auth.js');
+const model = require('./database/model');
 
 const { buildPage } = require('./template.js');
 
@@ -59,6 +60,21 @@ server.post('/signUp', upload.single('avatar'), (request, response) => {
         response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
       });
   }
+});
+
+// e.g. request from an img tag
+// <img src="/user/3/avatar">
+// server.get('/user/:id/avatar', (req, res) => {
+//   const sid = request.signedCookies.sid;
+//   model.getAvatar(sid).then((user) => {
+//     res.send(user.avatar);
+//   });
+// });
+
+server.get('/user/:id/avatar', (req, res) => {
+  model.getAvatar(req.params.id).then((user) => {
+    res.send(user.avatar);
+  });
 });
 
 /*server.get('/recipesAll', recipesAll.get);

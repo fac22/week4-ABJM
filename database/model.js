@@ -2,10 +2,13 @@ const db = require('./connection.js');
 
 function getUser(email) {
   const SELECT_USER = `
-    SELECT id, email, password, name FROM users WHERE email=$1
+    SELECT id, email, password, name, avatar FROM users WHERE email=$1
     `;
-
   return db.query(SELECT_USER, [email]).then((result) => result.rows[0]);
+}
+
+function getAvatar(id) {
+  return db.query('SELECT avatar FROM users WHERE id=?', id);
 }
 
 function createUser(name, email, hash, avatar) {
@@ -30,4 +33,19 @@ function deleteSession(sid) {
   return db.query(DELETE_SESSION, [sid]);
 }
 
-module.exports = { getUser, createUser, createSession, deleteSession };
+function getSession(sid) {
+  const GET_SESSION = `SELECT data FROM sessions WHERE sid = $1`;
+  return db.query(GET_SESSION, [sid]).then((result) => {
+    const singleResult = result.rows[0];
+    return singleResult && singleResult.data;
+  });
+}
+
+module.exports = {
+  getUser,
+  getAvatar,
+  createUser,
+  createSession,
+  deleteSession,
+  getSession,
+};
