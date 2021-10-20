@@ -12,7 +12,7 @@ function post(request, response) {
 		response.clearCookie('sid');
 		console.log('We logged out');
 		// redirect home
-		response.redirect('/');
+		response.redirect('/home');
 	});
 }
 

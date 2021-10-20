@@ -1,22 +1,12 @@
 const model = require('../database/model.js');
 const { buildPage } = require('../template.js');
-// const logOutPage = require('logOut.js');
 
-// LINKs
 
-// Version one - if false
-// 1. Login
-// 2. Signup
-
-//Version two - if true
-// 1. My profile
-// 2. Logout
-// 3. Show my recipes
-// 4. Go to all recipes
 
 function get(request, response) {
-  const sid = request.signedCookies.sid;
-  const title = `B-JAM Home`;
+	const sid = request.signedCookies.sid;
+	const title = `B-JAM Home`;
+
 
   return model
     .showRecipes()
@@ -58,6 +48,8 @@ function get(request, response) {
               <a>Logout</a>
               <a>Show my recipes</a>
               <a>Go to all recipes</a>
+              <a href="/recipeWrite">Write a new recipe</a>
+
             </section>
             ${recipeList}
             `;

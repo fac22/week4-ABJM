@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 const home = require('./routes/home.js');
 
+
 const server = express();
 
 // const recipesAll = require('./routes/recipesAll.js');
@@ -26,6 +27,12 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
 
+
+
+
+server.get('/recipeWrite', recipeWrite.get);
+server.post('/recipeWrite', recipeWrite.post);
+
 // // upload.single('avatar'),
 
 // server.get('/recipesAll', recipesAll.get);
@@ -42,6 +49,7 @@ server.get('/', home.get);
 
 // server.get('/recipePost', recipePost.get);
 // server.post('/recipePost', recipePost.post);
+
 
 server.get('/logIn', logIn.get);
 server.post('/logIn', logIn.post);
