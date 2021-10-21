@@ -1,3 +1,4 @@
+
 const model = require("../database/model.js");
 const { buildPage } = require("../template.js");
 // const logOutPage = require('logOut.js');
@@ -54,6 +55,7 @@ function get(req, res) {
       )
     );
   });
+
 }
 
 module.exports = { get };
