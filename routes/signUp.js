@@ -1,17 +1,17 @@
-const auth = require('../auth.js');
+const auth = require("../auth.js");
 
-const { buildPage } = require('../template.js');
+const { buildPage } = require("../template.js");
 
 function get(request, response) {
   //form
 
   response.send(
     buildPage(
-      'B-JAM Sign up',
+      "B-JAM Sign up",
       /*html*/ `
 	
 	<!--<form action="/signUp" enctype="multipart/form-data" method="post">-->
-	<form action="/signUp" method="post">
+	<form action="/signUp" enctype="multipart/form-data" method="post">
 	<div>
 		<label for="name">Name<span aria-hidden="true">*</span></label>
 		<p id="nameRequirements" class="requirements">
@@ -44,20 +44,39 @@ function get(request, response) {
     )
   );
 }
+const express = require("express");
+const multer = require("multer");
+const server = express();
+const upload = multer();
+const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
+const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 
-function post(request, response) {
-  const { email, password, name, avatar } = request.body;
-  auth
-    .createUser(name, email, password, avatar)
-    .then(auth.saveUserSession)
-    .then((sid) => {
-      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-      response.redirect('/');
-    })
-    .catch((error) => {
-      console.error(error);
-      response.send(buildPage(`Error`, `<h2>Couldn't sign up, sorry</h2>`));
-    });
-}
+server.post("/signUp", upload.single("avatar"), (request, response) => {
+  const file = request.file;
+  console.log(file.buffer);
+  if (!ALLOWED_TYPES.includes(file.mimetype)) {
+    response
+      .status(400)
+      .send("<h1>File upload error</h1><p>Please upload an image file</p>");
+  }
+  if (file.size > MAX_SIZE) {
+    response
+      .status(400)
+      .send("<h1>File upload error</h1><p>Profile picture must be < 5MB</p>");
+  } else {
+    const { email, password, name } = request.body;
+    auth
+      .createUser(name, email, password, file.buffer)
+      .then(auth.saveUserSession)
+      .then((sid) => {
+        response.cookie("sid", sid, auth.COOKIE_OPTIONS);
+        response.redirect("/");
+      })
+      .catch((error) => {
+        console.error(error);
+        response.send(buildPage(`Error`, `<h2>Couldn't sign up, sorry</h2>`));
+      });
+  }
+});
 
-module.exports = { get, post };
+module.exports = { get };

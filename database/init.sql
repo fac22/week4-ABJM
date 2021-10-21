@@ -7,7 +7,7 @@ CREATE TABLE users (
   email TEXT NOT NULL UNIQUE,
   name TEXT NOT NULL,
   password TEXT NOT NULL,
-  avatar BYTEA
+  avatar BYTEA NULL
   
 );
 

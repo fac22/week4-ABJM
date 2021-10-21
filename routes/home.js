@@ -1,31 +1,41 @@
-const model = require('../database/model.js');
-const { buildPage } = require('../template.js');
+const model = require("../database/model.js");
+const { buildPage } = require("../template.js");
+const express = require("express");
+const server = express();
+const multer = require("multer");
+const auth = require("../auth.js");
 
 function get(request, response) {
-	const sid = request.signedCookies.sid;
-	const title = `B-JAM Home`;
+  const sid = request.signedCookies.sid;
+  const title = `B-JAM Home`;
 
-	return model
-		.showRecipes()
-		.then(data => {
-			return data
-				.map(
-					recipe => /*html*/ `
+  return model
+    .showRecipes()
+    .then((data) => {
+      console.log(data);
+      return data
+        .map(
+          (recipe) => /*html*/ `
     <article>
     <h3>${recipe.title}</h3>
     <p>Author: ${recipe.name}</p>
+	<p>Avatar: ${
+    recipe.avatar
+      ? `<img src="/user/${recipe.id}/avatar" alt="" width="64" height="64">`
+      : ""
+  }</p>
     <ul>
     <li>Ingredients: ${recipe.ingredients}</li>
     <li>Instructions: ${recipe.instructions}</li>
     </ul>
     </article>
     `
-				)
-				.join('');
-		})
-		.then(recipeList => {
-			if (!sid) {
-				return /*html*/ `
+        )
+        .join("");
+    })
+    .then((recipeList) => {
+      if (!sid) {
+        return /*html*/ `
         <h1>Welcome to B-Jam Recipes🍓🥕</h1>
         <section>
           <a href="/signUp">Sign up</a>
@@ -33,14 +43,15 @@ function get(request, response) {
         </section>
         ${recipeList}
       `;
-			} else {
-				return model
-					.getSession(sid)
-					.then(session => console.log(session))
-					.then(userEmail => model.getUser(userEmail))
-					.then(user => {
-						return /*html*/ `
-            <h2> Happy to see you again🔆</h2>
+      } else {
+        return model
+          .getSession(sid)
+          .then((session) => console.log(session))
+          .then((userEmail) => model.getUser(userEmail))
+          .then((user) => {
+            console.log(user);
+            return /*html*/ `
+            <h2> Happy to see you again 🔆</h2>
             <section>
             <!--<a href="/logOut">Logout</a>-->
               <form action="/logOut" method="POST">
@@ -54,10 +65,16 @@ function get(request, response) {
             </section>
             ${recipeList}
             `;
-					});
-			}
-		})
-		.then(page => response.send(buildPage(title, page)));
+          });
+      }
+    })
+    .then((page) => response.send(buildPage(title, page)));
 }
+
+server.get("/user/:id/avatar", (req, res) => {
+  model.getAvatar(req.params.id).then((user) => {
+    res.send(user.avatar);
+  });
+});
 
 module.exports = { get };
