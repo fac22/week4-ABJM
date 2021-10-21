@@ -11,6 +11,7 @@ const recipesMine = require('./routes/recipesMine.js');
 const recipeWrite = require('./routes/recipeWrite.js');
 const logIn = require('./routes/logIn.js');
 const logOut = require('./routes/logOut.js');
+
 const signUp = require('./routes/signUp.js');
 const userDelete = require('./routes/userDelete.js');
 const userEdit = require('./routes/userEdit.js');
@@ -25,6 +26,7 @@ const { buildPage } = require('./template.js');
 const upload = multer();
 const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
 const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
+
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static('./public'));
@@ -95,22 +97,21 @@ server.post('/recipeWrite', recipeWrite.post);
 
 // // upload.single('avatar'),
 
-// server.get('/recipesAll', recipesAll.get);
+server.get('/recipesAll', recipesAll.get);
 // server.post('/recipesAll', recipesAll.post);
 
 server.get('/recipesMine', recipesMine.get);
 // server.post('/recipesMine', recipesMine.post);
 
-// server.get('/recipeDelete', recipeDelete.get);
-// server.post('/recipeDelete, recipeDelete.post);
+//server.get('/recipeDelete', recipeDelete.get);
+//server.post('/recipeDelete', recipeDelete.post);
 
-// server.get('/recipeEdit', recipeEdit.get);
-// server.post('/recipeEdit', recipeEdit.post);
+//server.get('/recipeEdit', recipeEdit.get);
+//server.post('/recipeEdit', recipeEdit.post);
 
-// /*server.get('/userDelete', userDelete.get);
-// server.post('/userDelete', userDelete.post);
+server.post('/userDelete', userDelete.post);
 
-// server.get('/userEdit', userEdit.get);
-// server.post('/userEdit', userEdit.post);*/
+server.get('/userEdit', userEdit.get);
+server.post('/userEdit', userEdit.post);
 
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
