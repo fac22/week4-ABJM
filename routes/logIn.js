@@ -11,17 +11,17 @@ function get(request, response) {
         <div class="flex">
 		<label for="email">Email<span aria-hidden="true">*</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <p id="emailRequirements" class="requirements">
+      Please remember your email.
+        </p>
 	    </div>
-      <p id="emailRequirements" class="requirements">
-        Please remember your email.
-      		</p>
 		<div class="flex">
 		<label for="password">Password<span aria-hidden="true">*</span></label>
 		<input placeholder="Enter your password" type="password" id="password" name="password" required>
+    <p id="passwordRequirements" class="requirements">
+    Please remember your password.
+        </p>
 	    </div>
-      <p id="passwordRequirements" class="requirements">
-      Please remember your password.
-      		</p>
       <div class="centre">
 			<button>Log in</button>
       <a href="/">Go back</a>
