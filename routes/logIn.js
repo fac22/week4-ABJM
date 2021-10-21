@@ -8,15 +8,17 @@ function get(request, response) {
   const form = /*html*/ `
 		<h1>Log in</h1>
 		<form action="/logIn" method="POST">
-        <div>
+        <div class="flex">
 		<label for="email">Email<span aria-hidden="true">*</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required>
 	    </div>
-		<div>
+		<div class="flex">
 		<label for="password">Password<span aria-hidden="true">*</span></label>
 		<input placeholder="Enter your password" type="password" id="password" name="password" required>
 	    </div>
+      <div class="centre">
 			<button>Log in</button>
+      </div>
 		</form>
 		`;
   response.send(buildPage(title, form));

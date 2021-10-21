@@ -4,6 +4,15 @@
   --green: #899878;
   --pale-green: #e4e6c3;
   --dark-green: #222725;
+  --orange: rgb(228, 154, 44);
+  --main-font: 'Indie Flower', cursive;
+  --heading-font: 'Titillium Web', sans-serif;
+  --link-font: 'Overpass', sans-serif;
+}
+
+body {
+  background-color: var(--ivory);
+  font-family: var(--main-font);
 }
 
 h1 {
@@ -14,6 +23,11 @@ h1 {
 
 h3 {
   margin: 0.3rem;
+}
+
+h1,
+h3 {
+  font-family: var(--heading-font);
 }
 
 section {
@@ -30,6 +44,7 @@ button {
   padding: 0.5rem;
   margin: 1rem;
   border-radius: 10px;
+  font-family: var(--link-font);
 }
 
 a:visited {
@@ -83,6 +98,7 @@ form {
   margin: 1rem;
   border-radius: 10px;
   text-align: left;
+  font-family: var(--link-font);
 }
 
 form > div {
@@ -98,6 +114,7 @@ label {
   color: var(--ivory);
   border-radius: 5px;
   padding: 0.2rem;
+  text-align: center;
 }
 
 input {
@@ -106,6 +123,37 @@ input {
 
 button {
   margin: 1rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-raw {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex > label {
+  flex: 1;
+}
+
+.flex > input {
+  flex: 2;
+}
+
+.requirements {
+  color: var(--orange);
+  margin-bottom: 1.3rem;
+}
+
+.centre {
+  display: block;
+  text-align: center;
 }
 
 @media only screen and (min-width: 670px) {
@@ -121,7 +169,6 @@ button {
     margin: 0;
   }
   form {
-    text-align: center;
     max-width: 70vw;
     margin: auto;
   }
