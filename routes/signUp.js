@@ -1,8 +1,8 @@
-const auth = require('../auth.js');
-const { buildPage } = require('../template.js');
+const auth = require("../auth.js");
+const { buildPage } = require("../template.js");
 function get(request, response) {
   //form
-  const title = 'B-JAM Sign up';
+  const title = "B-JAM Sign up";
   const content = /*html*/ `
 	<form action="/signUp" method="post">
 	<div class="flex">
@@ -63,6 +63,7 @@ function post(request, response) {
     .then((sid) => {
       response.cookie('sid', sid, auth.COOKIE_OPTIONS);
       response.redirect('/');
+
     })
     .catch((error) => {
       console.error(error);
