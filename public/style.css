@@ -2,9 +2,10 @@
 	--black: #121113;
 	--ivory: #f7f7f2;
 	--green: #899878;
+	--ligth-green: #bfcab3;
 	--pale-green: #e4e6c3;
 	--dark-green: #222725;
-	--orange: rgb(228, 154, 44);
+	--orange: rgb(134, 77, 3);
 	--red: rgb(146, 14, 14);
 	--main-font: 'Indie Flower', cursive;
 	--heading-font: 'Titillium Web', sans-serif;
@@ -22,12 +23,13 @@ h1 {
 	margin-bottom: 1rem;
 }
 
+h2,
 h3 {
 	margin: 0.3rem;
 }
 
 h1,
-h3 {
+h2 h3 {
 	font-family: var(--heading-font);
 }
 
@@ -37,7 +39,8 @@ section {
 
 a,
 button {
-	display: inline;
+	text-align: center;
+	display: inline-block;
 	font-size: 1rem;
 	text-decoration: none;
 	color: var(--dark-green);
@@ -48,6 +51,24 @@ button {
 	width: 5rem;
 	margin: 1rem;
 	padding: 0.4rem;
+}
+
+.home-links {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.home-links > form > button,
+.home-links > form > a {
+	display: block;
+	font-size: 0.5rem;
+	margin: auto;
+	margin-bottom: 0.2rem;
+	width: 5rem;
+}
+
+.home-links > form > button {
+	width: 5.8rem;
 }
 
 a {
@@ -83,12 +104,12 @@ article > div:first-child {
 }
 
 ul {
-	background-color: var(--pale-green);
 	padding: 0.4rem;
 }
 
 li {
-	background-color: var(--ivory);
+	background-color: var(--pale-green);
+	border: 1px solid var(--dark-green);
 	list-style: none;
 	margin: 0.5rem;
 	text-align: left;
@@ -194,8 +215,26 @@ input {
 		margin-bottom: 0.9rem;
 		font-size: 1rem;
 	}
+
+	ul {
+		background-color: var(--pale-green);
+		padding: 0.4rem;
+		width: 60%;
+	}
 }
 
 .error-color {
 	color: var(--red);
+}
+
+.li-style {
+	margin: auto;
+}
+
+.li-style > * {
+	background-color: var(--ligth-green);
+}
+
+.author {
+	font-family: var(--heading-font);
 }

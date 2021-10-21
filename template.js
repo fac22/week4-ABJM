@@ -18,7 +18,6 @@ function buildPage(title, content) {
    <body>
    <header><h1>B-JAM<h1></header>
    <main><section><div class="main">${content}<div></section></main>
-   <!--<script src="./public/index.js"></script>-->
    <script src="/index.js"></script>
 
    </body>`;
