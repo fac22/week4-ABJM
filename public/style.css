@@ -59,6 +59,11 @@ button {
   flex-direction: column;
   justify-content: center;
 }
+
+.home-links > form {
+  border: none;
+}
+
 .home-links > form > button,
 .home-links > form > a {
   display: block;
@@ -280,17 +285,17 @@ textarea {
     width: 60%;
   }
 
-  .home-links {
+  .home-links > form {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 2rem;
   }
   .home-links > form > button,
   .home-links > form > a {
     display: block;
     font-size: 0.5rem;
-    margin: auto;
+    margin: 1rem;
     margin-bottom: 0.2rem;
   }
   .form-no-style {
