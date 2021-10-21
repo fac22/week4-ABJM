@@ -151,7 +151,9 @@ label {
   text-align: center;
 }
 
-input {
+input,
+textarea {
+  font-family: var(--main-font);
   font-size: 1rem;
   margin: 0.3rem;
   border-radius: 5px;
