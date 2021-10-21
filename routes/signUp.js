@@ -1,9 +1,9 @@
-const auth = require("../auth.js");
-const { buildPage } = require("../template.js");
+const auth = require('../auth.js');
+const { buildPage } = require('../template.js');
 function get(request, response) {
-  //form
-  const title = "B-JAM Sign up";
-  const content = /*html*/ `
+	//form
+	const title = 'B-JAM Sign up';
+	const content = /*html*/ `
 	<form action="/signUp" method="post">
 	<div class="flex">
 		<label for="name">Name<span aria-hidden="true">  *</span></label>
@@ -17,7 +17,10 @@ function get(request, response) {
 		<label for="email">Email<span aria-hidden="true">  *</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$">
-	</div>	
+	</div>
+  <p id="emailRequirements" class="requirements centre">
+        email@example.com
+      		</p>
 	<div class="flex">
 	<label for="password">Password<span aria-hidden="true">  *</span></label>
 	<input placeholder="Enter your password" type="password" id="password" name="password"
@@ -37,37 +40,52 @@ function get(request, response) {
 	</div>
 	</form>
 	`;
-  response.send(buildPage(title, content));
+	response.send(buildPage(title, content));
 }
 
 // const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
 // const ALLOWED_TYPES = ['image/jpeg', 'image/png']; // probs want to support more formats than this
 
 function post(request, response) {
-  const { email, password, name, avatar } = request.body;
-  //   const file = request.file;
-  //   if (!ALLOWED_TYPES.includes(file.mimetype)) {
-  //     response
-  //       .status(400)
-  //       .send('<h1>File upload error</h1><p>Please upload an image file</p>');
-  //   }
-  //   // file.size tells us how big the file was (in bytes)
-  //   if (file.size > MAX_SIZE) {
-  //     response
-  //       .status(400)
-  //       .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
-  //   } else {
-  auth
-    .createUser(name, email, password, avatar)
-    .then(auth.saveUserSession)
-    .then((sid) => {
-      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-      response.redirect('/');
 
-    })
-    .catch((error) => {
-      console.error(error);
-      response.send(buildPage(`Error`, `<h2>Couldn't sign up, sorry</h2>`));
-    });
+	const { email, password, name, avatar } = request.body;
+
+	const errorTitle = `Error`;
+	const errorContent = /*html*/ `<h2>Couldn't sign up, sorry</h2>
+  <div class="centre"><a href="/">Go Home</a><a href="/signUp">Go Sign Up</a></div>`;
+	const errorPage = buildPage(errorTitle, errorContent);
+
+	// This is server-side validation:
+	if (!email || !password || !name) {
+		response.send(errorPage);
+	}
+	//   const file = request.file;
+	//   if (!ALLOWED_TYPES.includes(file.mimetype)) {
+	//     response
+	//       .status(400)
+	//       .send('<h1>File upload error</h1><p>Please upload an image file</p>');
+	//   }
+	//   // file.size tells us how big the file was (in bytes)
+	//   if (file.size > MAX_SIZE) {
+	//     response
+	//       .status(400)
+	//       .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
+	//   }
+	else {
+		auth
+			.createUser(name, email, password, avatar)
+			.then(auth.saveUserSession)
+			.then((sid) => {
+				response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+				response.redirect('/');
+			})
+			.catch((error) => {
+				console.error(error);
+				response.send(errorPage);
+			});
+	}
+
 }
+
+
 module.exports = { get, post };

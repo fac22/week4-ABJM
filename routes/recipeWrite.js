@@ -14,36 +14,45 @@ function get(request, response) {
       <div>
         <label for="title">Title<span aria-hidden="true">*</span></label>
         <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Enter the recipe title"
-          required
+				type="text"
+				id="title"
+				name="title"
+				placeholder="Enter the recipe title"
+				required
         />
-      </div>
-
+				</div>
+				<p id="titleRequirements" class="requirements centre">Please add your title.</p>
+				
       <!--Ingredients-->
       <div>
         <label for="ingredients">Ingredients<span aria-hidden="true">*</span></label>
         <textarea
-          id="ingredients"
-          name="ingredients"
-          placeholder="Onions, carrots, ... (max. length 1000 characters)"
-          maxlength="1000"
-          required
+				id="ingredients"
+				name="ingredients"
+				placeholder="Onions, carrots, ... (max. length 1000 characters)"
+				maxlength="1000"
+				rows="4" cols="30"
+				required
         ></textarea>
-      </div>
-      <!--Instructions-->
+				</div>
+				<p id="ingredientsRequirements" class="requirements centre">
+        Please add your ingredients.
+      		</p>
+				<!--Instructions-->
       <div>
         <label for="instructions">Instructions<span aria-hidden="true">*</span></label>
         <textarea
-          id="instructions"
-          name="instructions"
-          placeholder="Dice your onions. Peel your carrots. (max.   length 2000 characters)"
-          maxlength="2000"
-          required
+				id="instructions"
+				name="instructions"
+				placeholder="Dice your onions. Peel your carrots. (max.   length 2000 characters)"
+				maxlength="2000"
+				rows="4" cols="30"
+				required
         ></textarea>
-      </div>
+				</div>
+				<p id="instructionsRequirements" class="requirements centre">
+        Please add your instructions.
+      		</p>
       <button>Save Recipe</button>
 
     </form>
@@ -56,7 +65,7 @@ function get(request, response) {
 const db = require('../database/connection');
 function getSession(sid) {
 	const SELECT_SESSION = `SELECT data FROM sessions WHERE sid=$1`;
-	return db.query(SELECT_SESSION, [sid]).then(result => {
+	return db.query(SELECT_SESSION, [sid]).then((result) => {
 		const singleResult = result.rows[0];
 		return singleResult && singleResult.data;
 	});
@@ -72,35 +81,39 @@ function post(request, response) {
 	console.log(title);
 	// connect user_id:
 	// --> find cookie-sid
-	const sid = request.signedCookies.sid;
-	console.log(sid);
-	// --> sessions(data) --> email
-	model
-		.getSession(sid)
-		.then(session => {
-			console.log(session);
-			return session.user.email;
-		})
-		// --> users(email) --> id
-		.then(authorEmail => model.getUser(authorEmail))
-		// save title, ingredients, instructions, user_id in recipes
-		.then(dbUser => {
-			saveRecipe(title, ingredients, instructions, dbUser.id);
-			// redirect where?
-			response.redirect('/');
-		})
-		// catch errors
-		.catch(error => {
-			console.error(error);
-			response.send(
-				buildPage(
-					`Error`,
-					/*html*/ `<h2>Couldn't submit recipe</h2> <div>
-	      <a href="/">Go Back</a>
-	  </div>`
-				)
-			);
-		});
+
+	const errorTitle = `Error`;
+	const errorContent = /*html*/ `<h2>Couldn't add your recipe, sorry</h2>
+  <div class="centre"><a href="/">Go Home</a><a href="/recipeWrite">Try again</a></div>`;
+	const errorPage = buildPage(errorTitle, errorContent);
+
+	// This is server-side validation:
+	if (!title || !ingredients || !instructions) {
+		response.send(errorPage);
+	} else {
+		const sid = request.signedCookies.sid;
+		console.log(sid);
+		// --> sessions(data) --> email
+		model
+			.getSession(sid)
+			.then((session) => {
+				console.log(session);
+				return session.user.email;
+			})
+			// --> users(email) --> id
+			.then((authorEmail) => model.getUser(authorEmail))
+			// save title, ingredients, instructions, user_id in recipes
+			.then((dbUser) => {
+				saveRecipe(title, ingredients, instructions, dbUser.id);
+				// redirect where?
+				response.redirect('/');
+			})
+			// catch errors
+			.catch((error) => {
+				console.error(error);
+				response.send(errorPage);
+			});
+	}
 }
 
 module.exports = { get, post };
