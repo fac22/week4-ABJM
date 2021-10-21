@@ -1,0 +1,117 @@
+:root {
+  --black: #121113;
+  --ivory: #f7f7f2;
+  --green: #899878;
+  --pale-green: #e4e6c3;
+  --dark-green: #222725;
+}
+
+h1 {
+  text-align: center;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+section {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: (--dark-green);
+  background-color: var(--ivory);
+  border: 1px solid var(--dark-green);
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 10px;
+}
+
+a:visited {
+  color: var(--dark-green);
+}
+
+a:hover {
+  cursor: pointer;
+  background-color: var(--dark-green);
+  color: var(--ivory);
+}
+
+article {
+  width: 80vw;
+  margin: auto;
+  background-color: var(--green);
+  color: black;
+}
+
+ul {
+  background-color: var(--pale-green);
+  padding: 0.4rem;
+}
+
+li {
+  background-color: var(--ivory);
+  list-style: none;
+  margin: 1rem;
+  text-align: left;
+}
+
+form {
+  color: (var(--black));
+  background-color: var(--ivory);
+  border: 1px solid var(--dark-green);
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 10px;
+  text-align: left;
+}
+
+form > div {
+  margin-top: 0.5rem;
+}
+p {
+  margin: 0.3rem;
+}
+
+label {
+  background-color: var(--dark-green);
+  color: var(--ivory);
+  border-radius: 5px;
+  padding: 0.2rem;
+}
+
+input {
+  margin: 0.3rem;
+}
+
+button {
+  margin: 1rem;
+}
+
+@media only screen and (min-width: 670px) {
+  article {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+  }
+  article > div:first-child {
+    width: 50%;
+  }
+  ul {
+    margin: 0;
+  }
+  form {
+    text-align: center;
+    max-width: 70vw;
+    margin: auto;
+  }
+
+  form > div {
+    width: 60%;
+    margin: auto;
+    margin-top: 0.5rem;
+  }
+
+  button {
+    text-align: center;
+  }
+}
