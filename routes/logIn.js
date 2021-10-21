@@ -8,14 +8,14 @@ function get(request, response) {
   const form = /*html*/ `
 		<h1>Log in</h1>
 		<form action="/logIn" method="POST">
-        <div class="flex">
+        <div class="flex flex-column">
 		<label for="email">Email<span aria-hidden="true">*</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required>
     <p id="emailRequirements" class="requirements">
       Please remember your email.
         </p>
 	    </div>
-		<div class="flex">
+		<div class="flex flex-column">
 		<label for="password">Password<span aria-hidden="true">*</span></label>
 		<input placeholder="Enter your password" type="password" id="password" name="password" required>
     <p id="passwordRequirements" class="requirements">
