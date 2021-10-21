@@ -61,8 +61,9 @@ function post(request, response) {
     .createUser(name, email, password, avatar)
     .then(auth.saveUserSession)
     .then((sid) => {
-      response.cookie("sid", sid, auth.COOKIE_OPTIONS);
-      response.redirect("/");
+      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+      response.redirect('/');
+
     })
     .catch((error) => {
       console.error(error);
