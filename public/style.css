@@ -149,6 +149,7 @@ button {
 .requirements {
   color: var(--orange);
   margin-bottom: 1.3rem;
+  font-size: 0.8rem;
 }
 
 .centre {
@@ -181,5 +182,11 @@ button {
 
   button {
     text-align: center;
+  }
+
+  .requirements {
+    color: var(--orange);
+    margin-bottom: 1.3rem;
+    font-size: 1rem;
   }
 }
