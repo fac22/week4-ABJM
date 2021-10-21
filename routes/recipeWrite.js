@@ -56,7 +56,7 @@ function get(request, response) {
 const db = require('../database/connection');
 function getSession(sid) {
 	const SELECT_SESSION = `SELECT data FROM sessions WHERE sid=$1`;
-	return db.query(SELECT_SESSION, [sid]).then(result => {
+	return db.query(SELECT_SESSION, [sid]).then((result) => {
 		const singleResult = result.rows[0];
 		return singleResult && singleResult.data;
 	});
@@ -69,28 +69,28 @@ function saveRecipe(title, ingredients, instructions, author) {
 function post(request, response) {
 	// Get title, ingredients, instructions
 	const { title, ingredients, instructions } = request.body;
-	console.log(title);
+	// console.log(title);
 	// connect user_id:
 	// --> find cookie-sid
 	const sid = request.signedCookies.sid;
-	console.log(sid);
+	// console.log(sid);
 	// --> sessions(data) --> email
 	model
 		.getSession(sid)
-		.then(session => {
-			console.log(session);
+		.then((session) => {
+			// console.log(session);
 			return session.user.email;
 		})
 		// --> users(email) --> id
-		.then(authorEmail => model.getUser(authorEmail))
+		.then((authorEmail) => model.getUser(authorEmail))
 		// save title, ingredients, instructions, user_id in recipes
-		.then(dbUser => {
-			saveRecipe(title, ingredients, instructions, dbUser.id);
+		.then((dbUser) => {
+			model.saveRecipe(title, ingredients, instructions, dbUser.id);
 			// redirect where?
 			response.redirect('/');
 		})
 		// catch errors
-		.catch(error => {
+		.catch((error) => {
 			console.error(error);
 			response.send(
 				buildPage(

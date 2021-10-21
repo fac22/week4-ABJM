@@ -8,15 +8,15 @@ function get(request, response) {
 	const title = `My Recipes`;
 	model
 		.getSession(sid)
-		.then(session => {
-			console.log(session);
+		.then((session) => {
+			// console.log(session);
 			return session.user.email;
 		})
-		.then(userEmail => model.showMyRecipes(userEmail))
-		.then(data => {
+		.then((userEmail) => model.showMyRecipes(userEmail))
+		.then((data) => {
 			return data
 				.map(
-					recipe => /*html*/ `
+					(recipe) => /*html*/ `
             <article>
             <h3>${recipe.title}</h3>
             <p>Author: ${recipe.name}</p>
@@ -29,18 +29,17 @@ function get(request, response) {
 				)
 				.join('');
 		})
-		.then(recipeList => {
+		.then((recipeList) => {
 			const page = `<a href="/">Go Home</a> ${recipeList}`;
 			response.send(buildPage(title, page));
 		})
-		.catch(error => {
+		.catch((error) => {
 			console.error(error);
 			response.send(
 				buildPage(
 					`Error`,
-					/*html*/ `<h2>Couldn't show your recipes</h2> <div>
-	      <a href="/">Go Back</a>
-	  </div>`
+					/*html*/ `<h2>Couldn't show your recipes</h2>
+					<div><a href="/">Go Back</a></div>`
 				)
 			);
 		});

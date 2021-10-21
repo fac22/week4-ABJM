@@ -7,10 +7,10 @@ function get(request, response) {
 
 	return model
 		.showRecipes()
-		.then(data => {
+		.then((data) => {
 			return data
 				.map(
-					recipe => /*html*/ `
+					(recipe) => /*html*/ `
     <article>
     <h3>${recipe.title}</h3>
     <p>Author: ${recipe.name}</p>
@@ -23,7 +23,7 @@ function get(request, response) {
 				)
 				.join('');
 		})
-		.then(recipeList => {
+		.then((recipeList) => {
 			if (!sid) {
 				return /*html*/ `
         <h1>Welcome to B-Jam Recipes🍓🥕</h1>
@@ -36,9 +36,9 @@ function get(request, response) {
 			} else {
 				return model
 					.getSession(sid)
-					.then(session => console.log(session))
-					.then(userEmail => model.getUser(userEmail))
-					.then(user => {
+					.then((session) => console.log(session))
+					.then((userEmail) => model.getUser(userEmail))
+					.then((user) => {
 						return /*html*/ `
             <h2> Happy to see you again🔆</h2>
             <section>
@@ -57,7 +57,17 @@ function get(request, response) {
 					});
 			}
 		})
-		.then(page => response.send(buildPage(title, page)));
+		.then((page) => response.send(buildPage(title, page)))
+		.catch((error) => {
+			console.error(error);
+			response.send(
+				buildPage(
+					`Error`,
+					`<h2>Sorry, the Homepage isn't working</h2>
+          <div><a href="/">Go Back</a></div>`
+				)
+			);
+		});
 }
 
 module.exports = { get };
