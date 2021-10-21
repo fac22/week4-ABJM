@@ -19,8 +19,8 @@ function get(request, response) {
 	placeholder="Enter the recipe title"
 	required
 	/>
-	</div>
 	<p id="titleRequirements" class="requirements">Please add your title.</p>
+	</div>
 	
 	<!--Ingredients-->
 	<div class="flex flex-column">
@@ -33,10 +33,10 @@ function get(request, response) {
 	rows="4" cols="30"
 	required
 	></textarea>
-	</div>
 	<p id="ingredientsRequirements" class="requirements ">
 	Please add your ingredients.
 	</p>
+	</div>
 	<!--Instructions-->
 	<div class="flex flex-column">
 	<label for="instructions">Instructions<span aria-hidden="true">*</span></label>
@@ -48,10 +48,10 @@ function get(request, response) {
 	rows="4" cols="30"
 	required
 	></textarea>
-	</div>
 	<p id="instructionsRequirements" class="requirements ">
 	Please add your instructions.
 	</p>
+	</div>
 	<div class="margin-centre centre">
 	<button >Save Recipe</button>
 	</div>

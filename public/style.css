@@ -195,46 +195,6 @@ textarea {
   margin: auto;
 }
 
-@media only screen and (min-width: 670px) {
-  article {
-    display: flex;
-    flex-direction: row;
-    margin-top: 3rem;
-  }
-  article > div:first-child {
-    width: 50%;
-  }
-  ul {
-    margin: 0;
-  }
-  form {
-    max-width: 70vw;
-    margin: auto;
-  }
-
-  form > div {
-    width: 60%;
-    margin: auto;
-    margin-top: 0.5rem;
-  }
-
-  button {
-    text-align: center;
-  }
-
-  .requirements {
-    color: var(--orange);
-    margin-bottom: 0.9rem;
-    font-size: 1rem;
-  }
-
-  ul {
-    background-color: var(--pale-green);
-    padding: 0.4rem;
-    width: 60%;
-  }
-}
-
 .error-color {
   color: var(--red);
   font-weight: bold;
@@ -279,4 +239,64 @@ textarea {
   padding: 0;
   border-radius: 5px;
   justify-content: center;
+}
+
+@media only screen and (min-width: 670px) {
+  article {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+  }
+  article > div:first-child {
+    width: 50%;
+  }
+  ul {
+    margin: 0;
+  }
+  form {
+    max-width: 70vw;
+    margin: auto;
+  }
+
+  form > div {
+    width: 60%;
+    margin: auto;
+    margin-top: 0.5rem;
+  }
+
+  button {
+    text-align: center;
+  }
+
+  .requirements {
+    color: var(--orange);
+    margin-bottom: 0.9rem;
+    font-size: 1rem;
+  }
+
+  ul {
+    background-color: var(--pale-green);
+    padding: 0.4rem;
+    width: 60%;
+  }
+
+  .home-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2rem;
+  }
+  .home-links > form > button,
+  .home-links > form > a {
+    display: block;
+    font-size: 0.5rem;
+    margin: auto;
+    margin-bottom: 0.2rem;
+  }
+  .form-no-style {
+    margin: auto;
+  }
+  .manage-account {
+    margin-top: 2rem;
+  }
 }
