@@ -4,9 +4,9 @@ const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000;
 
 const home = require('./routes/home.js');
-const recipesAll = require('./routes/recipesAll.js');
-const recipeDelete = require('./routes/recipeDelete.js');
-const recipeEdit = require('./routes/recipeEdit.js');
+// const recipesAll = require('./routes/recipesAll.js');
+// const recipeDelete = require('./routes/recipeDelete.js');
+// const recipeEdit = require('./routes/recipeEdit.js');
 const recipesMine = require('./routes/recipesMine.js');
 const recipeWrite = require('./routes/recipeWrite.js');
 const logIn = require('./routes/logIn.js');
@@ -26,7 +26,6 @@ const { buildPage } = require('./template.js');
 const upload = multer();
 const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
 const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
-
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static('./public'));
@@ -73,8 +72,6 @@ server.get('/user/:id/avatar', (req, res) => {
   });
 });
 
-server.get('/recipesAll', recipesAll.get);
-
 //server.get('/recipeDelete', recipeDelete.get);
 //server.post('/recipeDelete', recipeDelete.post);
 
@@ -88,7 +85,7 @@ server.get('/logIn', logIn.get);
 server.post('/logIn', logIn.post);
 
 server.get('/signUp', signUp.get);
-//server.post('/signUp', signUp.post);
+server.post('/signUp', signUp.post);
 
 server.post('/logOut', logOut.post);
 
@@ -96,9 +93,6 @@ server.get('/recipeWrite', recipeWrite.get);
 server.post('/recipeWrite', recipeWrite.post);
 
 // // upload.single('avatar'),
-
-server.get('/recipesAll', recipesAll.get);
-// server.post('/recipesAll', recipesAll.post);
 
 server.get('/recipesMine', recipesMine.get);
 // server.post('/recipesMine', recipesMine.post);

@@ -1,61 +1,7 @@
-const auth = require("../auth.js");
-const multer = require("multer");
-const model = require("../database/model.js");
-
-// const upload = multer();
-
-const { buildPage } = require("../template.js");
-
-
-function get(req, res) {
-  model.getUsers().then((users) => {
-    console.log(users);
-    res.send(`
-		  <h1>Create new user</h1>
-		  <form enctype="multipart/form-data" method="post">
-			<p>
-			  <label for="email">Email</label>
-			  <input type="email" id="email" name="email">
-			</p>
-			<p>
-			  <label for="name">Name</label>
-			  <input type="name" id="name" name="name">
-			</p>
-			<div>
-				<label for="password">Password<span aria-hidden="true">*</span></label>
-				<p id="passwordRequirements" class="requirements">
-        		Passwords must be at least 5 characters
-        		long.
-      			</p>
-				<input placeholder="Enter your password" type="password" id="password" name="password"
-				aria-describedby="passwordError passwordRequirements" required="" minlength="5">
-			</div>
-			<p>
-			  <label for="avatar">Profile picture</label>
-			  <input type="file" id="avatar" name="avatar">
-			</p>
-			<p><button>Sign up</button></p>
-		  </form>
-		  <ul>
-			${users
-        .map(
-          (user) => `
-			  <li>
-				<h2>${user.name}</h2>
-				${
-          user.avatar
-            ? `<img src="/user/${user.id}/avatar" alt="" width="64" height="64">`
-            : ""
-        }
-			  </li>
-			`
-        )
-        .join("")}
-		 </ul>
-		`);
-  });
-
-
+const auth = require('../auth.js');
+const { buildPage } = require('../template.js');
+function get(request, response) {
+  //form
   const title = 'B-JAM Sign up';
   const content = /*html*/ `
 	<form action="/signUp" method="post">
@@ -77,7 +23,7 @@ function get(req, res) {
 	<input placeholder="Enter your password" type="password" id="password" name="password"
 		aria-describedby="passwordError passwordRequirements" required="" minlength="5">
 		</div>
-		<p id="passwordRequirements" class="requirements">
+		<p id="passwordRequirements" class="requirements centre">
         Passwords must be at least 5 characters
         long.
       		</p>
@@ -88,13 +34,10 @@ function get(req, res) {
 	<div class="centre">
 		<button>Sign up</button>
 		<a href="/">Go back</a>
-
 	</div>
 	</form>
 	`;
-
   response.send(buildPage(title, content));
-
 }
 
 const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
@@ -127,5 +70,4 @@ function post(request, response) {
       });
   }
 }
-
 module.exports = { get, post };

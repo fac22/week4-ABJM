@@ -1,4 +1,5 @@
-
+const model = require('../database/model.js');
+const { buildPage } = require('../template.js');
 function get(request, response) {
   const sid = request.signedCookies.sid;
   const title = `B-JAM Home`;
