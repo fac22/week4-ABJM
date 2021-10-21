@@ -255,6 +255,15 @@ textarea {
   article > div:first-child {
     width: 50%;
   }
+
+  article > div:last-child {
+    width: 50%;
+  }
+  article > div:last-child > ul {
+    width: 100%;
+    font-family: var(--main-font);
+  }
+
   ul {
     margin: 0;
   }
@@ -294,7 +303,8 @@ textarea {
   .home-links > form > button,
   .home-links > form > a {
     display: block;
-    font-size: 0.5rem;
+    width: 9rem;
+    font-size: 0.9rem;
     margin: 1rem;
     margin-bottom: 0.2rem;
   }
@@ -303,5 +313,10 @@ textarea {
   }
   .manage-account {
     margin-top: 2rem;
+  }
+  .recipesMine-links > button,
+  .recipesMine-links > a {
+    width: 8rem;
+    font-size: 0.7rem;
   }
 }
