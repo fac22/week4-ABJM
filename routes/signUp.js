@@ -17,7 +17,10 @@ function get(request, response) {
 		<label for="email">Email<span aria-hidden="true">  *</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$">
-	</div>	
+	</div>
+  <p id="emailRequirements" class="requirements centre">
+        email@example.com
+      		</p>
 	<div class="flex">
 	<label for="password">Password<span aria-hidden="true">  *</span></label>
 	<input placeholder="Enter your password" type="password" id="password" name="password"

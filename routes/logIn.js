@@ -12,10 +12,16 @@ function get(request, response) {
 		<label for="email">Email<span aria-hidden="true">*</span></label>
 		<input type="email" id="email" name="email" placeholder="Enter your email" required>
 	    </div>
+      <p id="emailRequirements" class="requirements centre">
+        Please remember your email.
+      		</p>
 		<div class="flex">
 		<label for="password">Password<span aria-hidden="true">*</span></label>
 		<input placeholder="Enter your password" type="password" id="password" name="password" required>
 	    </div>
+      <p id="passwordRequirements" class="requirements centre">
+      Please remember your password.
+      		</p>
       <div class="centre">
 			<button>Log in</button>
       <a href="/">Go back</a>

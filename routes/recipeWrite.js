@@ -14,36 +14,45 @@ function get(request, response) {
       <div>
         <label for="title">Title<span aria-hidden="true">*</span></label>
         <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Enter the recipe title"
-          required
+				type="text"
+				id="title"
+				name="title"
+				placeholder="Enter the recipe title"
+				required
         />
-      </div>
-
+				</div>
+				<p id="titleRequirements" class="requirements centre">Please add your title.</p>
+				
       <!--Ingredients-->
       <div>
         <label for="ingredients">Ingredients<span aria-hidden="true">*</span></label>
         <textarea
-          id="ingredients"
-          name="ingredients"
-          placeholder="Onions, carrots, ... (max. length 1000 characters)"
-          maxlength="1000"
-          required
+				id="ingredients"
+				name="ingredients"
+				placeholder="Onions, carrots, ... (max. length 1000 characters)"
+				maxlength="1000"
+				rows="4" cols="30"
+				required
         ></textarea>
-      </div>
-      <!--Instructions-->
+				</div>
+				<p id="ingredientsRequirements" class="requirements centre">
+        Please add your ingredients.
+      		</p>
+				<!--Instructions-->
       <div>
         <label for="instructions">Instructions<span aria-hidden="true">*</span></label>
         <textarea
-          id="instructions"
-          name="instructions"
-          placeholder="Dice your onions. Peel your carrots. (max.   length 2000 characters)"
-          maxlength="2000"
-          required
+				id="instructions"
+				name="instructions"
+				placeholder="Dice your onions. Peel your carrots. (max.   length 2000 characters)"
+				maxlength="2000"
+				rows="4" cols="30"
+				required
         ></textarea>
-      </div>
+				</div>
+				<p id="instructionsRequirements" class="requirements centre">
+        Please add your instructions.
+      		</p>
       <button>Save Recipe</button>
 
     </form>
