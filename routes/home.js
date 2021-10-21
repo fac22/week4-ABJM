@@ -1,32 +1,46 @@
 const model = require('../database/model.js');
 const { buildPage } = require('../template.js');
 function get(request, response) {
-  const sid = request.signedCookies.sid;
-  const title = `B-JAM Home`;
+	const sid = request.signedCookies.sid;
+	const title = `B-JAM Home`;
 
-  return model
-    .showRecipes()
-    .then((data) => {
-      return data
-        .map(
-          (recipe) => /*html*/ `
+	return model
+		.showRecipes()
+		.then((data) => {
+			return data
+				.map(
+					(recipe) => /*html*/ `
     <article>
     <div>
-    <h3>${recipe.title}</h3>
-    <p>Author: ${recipe.name}</p>
+    <h2>${recipe.title}</h2>
+    <p class="author">Author: ${recipe.name}</p>
     </div>
     <ul>
-    <li><p>Ingredients<p> ${recipe.ingredients}</li>
-    <li><p>Instructions<p> ${recipe.instructions}</li>
+      <li>Ingredients
+        <ul class="li-style">
+        ${recipe.ingredients
+					.split(', ')
+					.map((x) => `<li>${x}</li>`)
+					.join('')}
+        </ul>
+      </li>
+      <li>Instructions 
+        <ul class="li-style">
+        ${recipe.instructions
+					.split('. ')
+					.map((x) => `<li>${x}</li>`)
+					.join('')}
+        </ul>
+      </li>
     </ul>
     </article>
     `
-        )
-        .join('');
-    })
-    .then((recipeList) => {
-      if (!sid) {
-        return /*html*/ `
+				)
+				.join('');
+		})
+		.then((recipeList) => {
+			if (!sid) {
+				return /*html*/ `
         <section>
         <h1>Welcome to B-Jam Recipes🍓🥕</h1>
      
@@ -36,15 +50,15 @@ function get(request, response) {
         </section>
         ${recipeList}
       `;
-      } else {
-        return model
-          .getSession(sid)
-          .then((session) => console.log(session))
-          .then((userEmail) => model.getUser(userEmail))
-          .then((user) => {
-            return /*html*/ `
+			} else {
+				return model
+					.getSession(sid)
+					.then((session) => console.log(session))
+					.then((userEmail) => model.getUser(userEmail))
+					.then((user) => {
+						return /*html*/ `
             <h2> Happy to see you again🔆</h2>
-            <section>
+            <section class="home-links">
             <!--<a href="/logOut">Logout</a>-->
               <form action="/logOut" method="POST">
                 <button id="logoutBtn">Log out</button>
@@ -57,10 +71,20 @@ function get(request, response) {
             </section>
             ${recipeList}
             `;
-          });
-      }
-    })
-    .then((page) => response.send(buildPage(title, page)));
+					});
+			}
+		})
+		.then((page) => response.send(buildPage(title, page)))
+		.catch((error) => {
+			console.warn(error);
+			response.send(
+				buildPage(
+					`Error`,
+					`<h2> Couldn't load homepage, sorry</h2>
+        <div class="centre"><a href="/">Go Home</a>`
+				)
+			);
+		});
 }
 
 module.exports = { get };

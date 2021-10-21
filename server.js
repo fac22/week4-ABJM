@@ -34,42 +34,51 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 server.get('/', home.get);
 
 server.post('/', upload.single('avatar'), (request, response) => {
-  const file = request.file;
+	const file = request.file;
 
-  //file.mimetype tells us what kind of file it was
-  if (!ALLOWED_TYPES.includes(file.mimetype)) {
-    response
-      .status(400)
-      .send('<h1>File upload error</h1><p>Please upload an image file</p>');
-  }
-  //file.size tells us how big the file was (in bytes)
-  if (file.size > MAX_SIZE) {
-    response
-      .status(400)
-      .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
-  } else {
-    const { name, email, password } = request.body;
-    console.log(file.buffer);
-    auth
-      .createUser(name, email, password, file.buffer)
-      .then(auth.saveUserSession)
-      .then((sid) => {
-        response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-        response.redirect('/');
-      })
-      .catch(() => {
-        response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
-      });
-  }
+	//file.mimetype tells us what kind of file it was
+	if (!ALLOWED_TYPES.includes(file.mimetype)) {
+		response
+			.status(400)
+			.send('<h1>File upload error</h1><p>Please upload an image file</p>');
+	}
+	//file.size tells us how big the file was (in bytes)
+	if (file.size > MAX_SIZE) {
+		response
+			.status(400)
+			.send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
+	} else {
+		const { name, email, password } = request.body;
+		console.log(file.buffer);
+		auth
+			.createUser(name, email, password, file.buffer)
+			.then(auth.saveUserSession)
+			.then((sid) => {
+				response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+				response.redirect('/');
+			})
+			.catch((error) => {
+				console.warn(error);
+				response.send(buildPage(`Error`, `<h2> Couldn't sign up, sorry</h2>`));
+			});
+	}
 });
 
 // e.g. request from an img tag
 // <img src="/user/3/avatar">
 
 server.get('/user/:id/avatar', (req, res) => {
-  model.getAvatar(req.params.id).then((user) => {
-    res.send(user.avatar);
-  });
+	model
+		.getAvatar(req.params.id)
+		.then((user) => {
+			res.send(user.avatar);
+		})
+		.catch((error) => {
+			console.warn(error);
+			res.send(
+				buildPage(`Error`, `<h2> Couldn't handle your avatar, sorry</h2>`)
+			);
+		});
 });
 
 //server.get('/recipeDelete', recipeDelete.get);

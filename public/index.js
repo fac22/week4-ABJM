@@ -14,13 +14,16 @@ form.addEventListener('submit', (event) => {
 const inputs = form.querySelectorAll('input');
 
 inputs.forEach((input) => {
+	const errorId = input.id + 'Requirements';
+	const errorContainer = form.querySelector('#' + errorId);
+
 	input.setAttribute('aria-invalid', false);
 	input.addEventListener('invalid', () => {
 		input.setAttribute('aria-invalid', true);
 
-		const errorId = input.id + 'Requirements';
-		const errorContainer = form.querySelector('#' + errorId);
-		console.log(errorContainer);
+		// const errorId = input.id + 'Requirements';
+		// const errorContainer = form.querySelector('#' + errorId);
+		// console.log(errorContainer);
 		// errorContainer.textContent = input.validationMessage;
 		errorContainer.classList.add('error-color');
 	});
@@ -28,8 +31,8 @@ inputs.forEach((input) => {
 	input.addEventListener('input', () => {
 		input.setAttribute('aria-invalid', false);
 
-		const errorId = input.id + 'Requirements';
-		const errorContainer = form.querySelector('#' + errorId);
+		// const errorId = input.id + 'Requirements';
+		// const errorContainer = form.querySelector('#' + errorId);
 		// errorContainer.textContent = '';
 		errorContainer.classList.remove('error-color');
 	});
@@ -38,13 +41,15 @@ inputs.forEach((input) => {
 const textareas = form.querySelectorAll('textarea');
 
 textareas.forEach((textarea) => {
+	const errorId = textarea.id + 'Requirements';
+	const errorContainer = form.querySelector('#' + errorId);
 	textarea.setAttribute('aria-invalid', false);
 	textarea.addEventListener('invalid', () => {
 		textarea.setAttribute('aria-invalid', true);
 
-		const errorId = textarea.id + 'Requirements';
-		const errorContainer = form.querySelector('#' + errorId);
-		console.log(errorContainer);
+		// const errorId = textarea.id + 'Requirements';
+		// const errorContainer = form.querySelector('#' + errorId);
+		// console.log(errorContainer);
 		// errorContainer.textContent = input.validationMessage;
 		errorContainer.classList.add('error-color');
 	});
@@ -52,8 +57,8 @@ textareas.forEach((textarea) => {
 	textarea.addEventListener('input', () => {
 		textarea.setAttribute('aria-invalid', false);
 
-		const errorId = textarea.id + 'Requirements';
-		const errorContainer = form.querySelector('#' + errorId);
+		// const errorId = textarea.id + 'Requirements';
+		// const errorContainer = form.querySelector('#' + errorId);
 		// errorContainer.textContent = '';
 		errorContainer.classList.remove('error-color');
 	});
