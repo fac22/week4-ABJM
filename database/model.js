@@ -1,10 +1,9 @@
-const db = require('./connection.js');
+const db = require("./connection.js");
 
 function getUser(email) {
   const SELECT_USER = `
     SELECT id, email, password, name, avatar FROM users WHERE email=$1
     `;
-
   return db.query(SELECT_USER, [email]).then((result) => result.rows[0]);
 }
 
@@ -14,7 +13,13 @@ function createUser(name, email, hash, avatar) {
   return db.query(INSERT_USER, [name, email, hash, avatar]).then((result) => {
     return result.rows[0];
   });
+
+function getAvatar(id) {
+  return db
+    .query("SELECT avatar FROM users WHERE id=$1", [id])
+    .then((result) => result.rows[0]);
 }
+
 
 function createSession(sid, json) {
   const INSERT_SESSION = `INSERT INTO sessions (sid, data) VALUES ($1, $2)
@@ -37,13 +42,12 @@ function getSession(sid) {
   });
 }
 
-function getRecipes() {
-  const GET_RECIPES = `
-  SELECT * FROM recipes 
-  `;
-  console.log('deleting recipe');
-  return db.query(GET_RECIPES).then((result) => result.rows);
+function getUsers() {
+  return db
+    .query(`SELECT id, email, password, name, avatar FROM users`)
+    .then((result) => result.rows);
 }
+
 
 function showRecipes() {
   const query = `SELECT 
@@ -107,5 +111,5 @@ module.exports = {
   updateUser,
   deleteUser,
   deleteRecipe,
-  getRecipes,
+
 };

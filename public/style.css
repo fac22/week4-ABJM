@@ -1,0 +1,196 @@
+:root {
+  --black: #121113;
+  --ivory: #f7f7f2;
+  --green: #899878;
+  --pale-green: #e4e6c3;
+  --dark-green: #222725;
+  --orange: rgb(228, 154, 44);
+  --main-font: 'Indie Flower', cursive;
+  --heading-font: 'Titillium Web', sans-serif;
+  --link-font: 'Overpass', sans-serif;
+}
+
+body {
+  background-color: var(--ivory);
+  font-family: var(--main-font);
+}
+
+h1 {
+  text-align: center;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin: 0.3rem;
+}
+
+h1,
+h3 {
+  font-family: var(--heading-font);
+}
+
+section {
+  text-align: center;
+}
+
+a,
+button {
+  display: inline;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--dark-green);
+  background-color: var(--ivory);
+  border: 1px solid var(--dark-green);
+  border-radius: 10px;
+  font-family: var(--link-font);
+  width: 5rem;
+  margin: 1rem;
+  padding: 0.4rem;
+}
+
+a {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+}
+
+a:visited {
+  color: var(--dark-green);
+  background-color: var(--ivory);
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
+  background-color: var(--dark-green);
+  color: var(--ivory);
+}
+
+article {
+  width: 80vw;
+  margin: auto;
+  background-color: var(--green);
+  color: black;
+  border-radius: 5px;
+}
+
+article > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ul {
+  background-color: var(--pale-green);
+  padding: 0.4rem;
+}
+
+li {
+  background-color: var(--ivory);
+  list-style: none;
+  margin: 0.5rem;
+  text-align: left;
+  padding: 0.3rem;
+}
+
+p {
+  margin: 0.3rem;
+}
+
+form {
+  color: (var(--black));
+  background-color: var(--ivory);
+  border: 1px solid var(--dark-green);
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 10px;
+  text-align: left;
+  font-family: var(--link-font);
+}
+
+form > div {
+  margin-top: 0.5rem;
+}
+
+.gap {
+  margin: 2rem;
+}
+
+label {
+  background-color: var(--dark-green);
+  color: var(--ivory);
+  border-radius: 5px;
+  padding: 0.2rem;
+  text-align: center;
+}
+
+input {
+  margin: 0.3rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-raw {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex > label {
+  flex: 1;
+}
+
+.flex > input {
+  flex: 2;
+}
+
+.requirements {
+  color: var(--orange);
+  margin-bottom: 1.3rem;
+  font-size: 0.8rem;
+}
+
+.centre {
+  display: block;
+  text-align: center;
+}
+
+@media only screen and (min-width: 670px) {
+  article {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+  }
+  article > div:first-child {
+    width: 50%;
+  }
+  ul {
+    margin: 0;
+  }
+  form {
+    max-width: 70vw;
+    margin: auto;
+  }
+
+  form > div {
+    width: 60%;
+    margin: auto;
+    margin-top: 0.5rem;
+  }
+
+  button {
+    text-align: center;
+  }
+
+  .requirements {
+    color: var(--orange);
+    margin-bottom: 0.9rem;
+    font-size: 1rem;
+  }
+}
