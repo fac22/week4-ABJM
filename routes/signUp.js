@@ -26,7 +26,7 @@ function get(request, response) {
 	<input placeholder="Enter your password" type="password" id="password" name="password"
 		aria-describedby="passwordError passwordRequirements" required="" minlength="5">
 		</div>
-		<p id="passwordRequirements" class="requirements centre">
+		<p id="passwordRequirements" class="requirements">
         Passwords must be at least 5 characters
         long.
       		</p>
@@ -36,7 +36,7 @@ function get(request, response) {
 	</div>
 	<div class="centre">
 		<button>Sign up</button>
-		<a href="/home">Go back</a>
+		<a href="/">Go back</a>
 
 	</div>
 	</form>
@@ -44,6 +44,9 @@ function get(request, response) {
 
   response.send(buildPage(title, content));
 }
+
+const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
+const ALLOWED_TYPES = ['image/jpeg', 'image/png']; // probs want to support more formats than this
 
 function post(request, response) {
   const { email, password, name } = request.body;

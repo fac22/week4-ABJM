@@ -36,15 +36,23 @@ section {
 
 a,
 button {
+  display: inline;
   font-size: 1rem;
   text-decoration: none;
   color: var(--dark-green);
   background-color: var(--ivory);
   border: 1px solid var(--dark-green);
-  padding: 0.5rem;
-  margin: 1rem;
   border-radius: 10px;
   font-family: var(--link-font);
+  width: 5rem;
+  margin: 1rem;
+  padding: 0.4rem;
+}
+
+a {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
 }
 
 a:visited {
@@ -121,10 +129,6 @@ input {
   margin: 0.3rem;
 }
 
-button {
-  margin: 1rem;
-}
-
 .flex {
   display: flex;
   justify-content: flex-end;
@@ -186,7 +190,7 @@ button {
 
   .requirements {
     color: var(--orange);
-    margin-bottom: 1.3rem;
+    margin-bottom: 0.9rem;
     font-size: 1rem;
   }
 }

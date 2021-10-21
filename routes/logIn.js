@@ -18,7 +18,7 @@ function get(request, response) {
 	    </div>
       <div class="centre">
 			<button>Log in</button>
-      <a href="/home">Go back</a>
+      <a href="/">Go back</a>
       </div>
 		</form>
 		`;
