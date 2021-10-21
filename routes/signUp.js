@@ -36,6 +36,8 @@ function get(request, response) {
 	</div>
 	<div class="centre">
 		<button>Sign up</button>
+		<a href="/home">Go back</a>
+
 	</div>
 	</form>
 	`;
