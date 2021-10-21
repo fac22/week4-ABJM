@@ -2,30 +2,32 @@ const model = require('../database/model.js');
 const { buildPage } = require('../template.js');
 
 function get(request, response) {
-	const sid = request.signedCookies.sid;
-	const title = `B-JAM Home`;
+  const sid = request.signedCookies.sid;
+  const title = `B-JAM Home`;
 
-	return model
-		.showRecipes()
-		.then(data => {
-			return data
-				.map(
-					recipe => /*html*/ `
+  return model
+    .showRecipes()
+    .then((data) => {
+      return data
+        .map(
+          (recipe) => /*html*/ `
     <article>
+    <div>
     <h3>${recipe.title}</h3>
     <p>Author: ${recipe.name}</p>
+    </div>
     <ul>
     <li>Ingredients: ${recipe.ingredients}</li>
     <li>Instructions: ${recipe.instructions}</li>
     </ul>
     </article>
     `
-				)
-				.join('');
-		})
-		.then(recipeList => {
-			if (!sid) {
-				return /*html*/ `
+        )
+        .join('');
+    })
+    .then((recipeList) => {
+      if (!sid) {
+        return /*html*/ `
         <h1>Welcome to B-Jam Recipes🍓🥕</h1>
         <section>
           <a href="/signUp">Sign up</a>
@@ -33,13 +35,13 @@ function get(request, response) {
         </section>
         ${recipeList}
       `;
-			} else {
-				return model
-					.getSession(sid)
-					.then(session => console.log(session))
-					.then(userEmail => model.getUser(userEmail))
-					.then(user => {
-						return /*html*/ `
+      } else {
+        return model
+          .getSession(sid)
+          .then((session) => console.log(session))
+          .then((userEmail) => model.getUser(userEmail))
+          .then((user) => {
+            return /*html*/ `
             <h2> Happy to see you again🔆</h2>
             <section>
             <!--<a href="/logOut">Logout</a>-->
@@ -54,10 +56,10 @@ function get(request, response) {
             </section>
             ${recipeList}
             `;
-					});
-			}
-		})
-		.then(page => response.send(buildPage(title, page)));
+          });
+      }
+    })
+    .then((page) => response.send(buildPage(title, page)));
 }
 
 module.exports = { get };
