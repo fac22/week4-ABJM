@@ -10,10 +10,12 @@ const COOKIE_OPTIONS = {
 };
 
 function createUser(name, email, password, avatar) {
-	return bcrypt.hash(password, 10).then((hash) => {
-		console.log('auth.js:', avatar);
-		return model.createUser(name, email, hash, avatar);
-	});
+
+  return bcrypt.hash(password, 10).then((hash) => {
+    console.log('auth.js:', avatar);
+    return model.createUser(name, email, hash, avatar);
+  });
+
 }
 
 function verifyUser(email, password) {
