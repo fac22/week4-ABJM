@@ -47,6 +47,7 @@ function get(request, response) {
 // const ALLOWED_TYPES = ['image/jpeg', 'image/png']; // probs want to support more formats than this
 
 function post(request, response) {
+
 	const { email, password, name, avatar } = request.body;
 
 	const errorTitle = `Error`;
@@ -83,35 +84,8 @@ function post(request, response) {
 				response.send(errorPage);
 			});
 	}
+
 }
 
-// From Workshop
-function postDog(request, response) {
-	const newDog = request.body;
-	if (!newDog.name || !newDog.breed) {
-		response.redirect('/add-dog/error');
-	} else {
-		const name = newDog.name.toLowerCase();
-		dogs[name] = newDog;
-		response.redirect(`/dogs/${newDog.name}`);
-	}
-}
-
-function errorDog(request, response) {
-	const html = `
-  <!doctype html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Error</title>
-    </head>
-    <body>
-      <h1>Submission error</h1>
-      <p>Something went wrong with your submission, sorry!</p>
-    </body>
-  </html>
-  `;
-	response.end(html);
-}
 
 module.exports = { get, post };

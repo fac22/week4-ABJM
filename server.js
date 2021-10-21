@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 
 const home = require('./routes/home.js');
 // const recipesAll = require('./routes/recipesAll.js');
-// const recipeDelete = require('./routes/recipeDelete.js');
+const recipeDelete = require('./routes/recipeDelete.js');
 // const recipeEdit = require('./routes/recipeEdit.js');
 const recipesMine = require('./routes/recipesMine.js');
 const recipeWrite = require('./routes/recipeWrite.js');
@@ -104,6 +104,8 @@ server.get('/recipesMine', recipesMine.get);
 //server.post('/recipeEdit', recipeEdit.post);
 
 server.post('/userDelete', userDelete.post);
+
+server.post('/recipeDelete', recipeDelete.post);
 
 server.get('/userEdit', userEdit.get);
 server.post('/userEdit', userEdit.post);

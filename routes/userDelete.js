@@ -8,7 +8,7 @@ function post(request, response) {
     .then(() => model.deleteSession(sid))
     .then(() => {
       response.clearCookie('sid');
-      response.send('successfully deleted');
+      response.redirect('/');
     });
 }
 

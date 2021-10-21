@@ -15,6 +15,12 @@ function createUser(name, email, hash, avatar) {
   });
 }
 
+function getRecipes() {
+  return db
+    .query('SELECT * FROM recipes WHERE id=$1', [id])
+    .then((result) => result.rows[0]);
+}
+
 function getAvatar(id) {
   return db
     .query('SELECT avatar FROM users WHERE id=$1', [id])
@@ -40,12 +46,6 @@ function getSession(sid) {
     const singleResult = result.rows[0];
     return singleResult && singleResult.data;
   });
-}
-
-function getUsers() {
-  return db
-    .query(`SELECT id, email, password, name, avatar FROM users`)
-    .then((result) => result.rows);
 }
 
 function showRecipes() {
@@ -82,9 +82,11 @@ function updateUser(sessionEmail, name) {
     .then((result) => result.rows[0]);
 }
 
-function deleteRecipe(recipeID, user_id) {
-  const DELETE_RECIPE = `DELETE FROM recipes WHERE id=$1 AND user_id=$2`;
-  return db.query(DELETE_RECIPE, [parseInt(recipeID, 10), user_id]);
+function deleteRecipe(title) {
+  console.log('title being passed to delete Recipe function', title);
+  const DELETE_RECIPE = `DELETE FROM recipes WHERE title=$1`;
+  console.log('deleting recipe');
+  return db.query(DELETE_RECIPE, [title]);
 }
 
 /*function updateRecipe(sessionRecipe, name) {
