@@ -1,13 +1,15 @@
 const model = require('../database/model');
-const template = require('../template');
 
 function post(request, response) {
-	// sid
-	// getSession
-	// model.deleteUser
-	// delete session
-	// clear cookie
-	// Error message
+  const sid = request.signedCookies.sid;
+  model
+    .getSession(sid)
+    .then((session) => model.deleteUser(session.user.name))
+    .then(() => model.deleteSession(sid))
+    .then(() => {
+      response.clearCookie('sid');
+      response.redirect('/');
+    });
 }
 
 module.exports = { post };

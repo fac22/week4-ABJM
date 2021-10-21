@@ -17,8 +17,8 @@ const recipesMine = require('./routes/recipesMine.js');
 // const recipesAll = require('./routes/recipesAll.js');
 // const recipeDelete = require('./routes/recipeDelete.js');
 // const recipeEdit = require('./routes/recipeEdit.js');
-// const userDelete = require('./routes/userDelete.js');
-// const userEdit = require('./routes/userEdit.js');
+const userDelete = require('./routes/userDelete.js');
+const userEdit = require('./routes/userEdit.js');
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static('./public'));
@@ -51,10 +51,9 @@ server.get('/recipesMine', recipesMine.get);
 // server.get('/recipeEdit', recipeEdit.get);
 // server.post('/recipeEdit', recipeEdit.post);
 
-// /*server.get('/userDelete', userDelete.get);
-// server.post('/userDelete', userDelete.post);
+server.post('/userDelete', userDelete.post);
 
-// server.get('/userEdit', userEdit.get);
-// server.post('/userEdit', userEdit.post);*/
+server.get('/userEdit', userEdit.get);
+server.post('/userEdit', userEdit.post);
 
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
