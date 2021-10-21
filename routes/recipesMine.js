@@ -17,11 +17,15 @@ function get(request, response) {
       return data
         .map(
           (recipe) => /*html*/ `
+					<h1>My Recipes🍓🥕</hq>
             <article>
-            <h3>${recipe.title}</h3>
+						<div>
+            <h2>${recipe.title}</h2>
             <p>Author: ${recipe.name}</p>
+						</div>
+						<div>
             <ul>
-              <li>Ingredients
+              <li class="bold">Ingredients
               <ul class="li-style">
               ${recipe.ingredients
                 .split(', ')
@@ -29,7 +33,7 @@ function get(request, response) {
                 .join('')}
               </ul>
               </li>
-              <li>Instructions 
+              <li class="bold">Instructions 
               <ul class="li-style">
               ${recipe.instructions
                 .split('. ')
@@ -38,16 +42,18 @@ function get(request, response) {
               </ul>
               </li>
             </ul>
+						</div>
             </article>
-            <form action="/recipeDelete" method="POST" class="form-no-style centre">
+            <form action="/recipeDelete" method="POST" class="form-no-style centre recipesMine-links" >
                 <button>Delete my recipe</button>
+								<a href="/">Go Home</a> 
             </form>
             `
         )
         .join('');
     })
     .then((recipeList) => {
-      const page = `<a href="/">Go Home</a> ${recipeList}`;
+      const page = `${recipeList}`;
       response.send(buildPage(title, page));
     })
     .catch((error) => {
