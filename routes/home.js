@@ -48,7 +48,7 @@ function get(request, response) {
             <!--<a href="/logOut">Logout</a>-->
               <form action="/logOut" method="POST">
                 <button id="logoutBtn">Log out</button>
-                <a href="/userProfile">My profile</a>
+                <a href="/userEdit">My profile</a>
                 <a href="/recipesMine">Show my recipes</a>
                 <!--<a href="/recipesAll">Go to all recipes</a>-->
                 <a href="/recipeWrite">Write a new recipe</a>

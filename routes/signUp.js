@@ -40,34 +40,33 @@ function get(request, response) {
   response.send(buildPage(title, content));
 }
 
-const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
-const ALLOWED_TYPES = ['image/jpeg', 'image/png']; // probs want to support more formats than this
+// const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
+// const ALLOWED_TYPES = ['image/jpeg', 'image/png']; // probs want to support more formats than this
 
 function post(request, response) {
-  const { email, password, name } = request.body;
-  const file = request.file;
-  if (!ALLOWED_TYPES.includes(file.mimetype)) {
-    response
-      .status(400)
-      .send('<h1>File upload error</h1><p>Please upload an image file</p>');
-  }
-  // file.size tells us how big the file was (in bytes)
-  if (file.size > MAX_SIZE) {
-    response
-      .status(400)
-      .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
-  } else {
-    auth
-      .createUser(name, email, password, file.buffer)
-      .then(auth.saveUserSession)
-      .then((sid) => {
-        response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-        response.redirect('/');
-      })
-      .catch((error) => {
-        console.error(error);
-        response.send(buildPage(`Error`, `<h2>Couldn't sign up, sorry</h2>`));
-      });
-  }
+  const { email, password, name, avatar } = request.body;
+  //   const file = request.file;
+  //   if (!ALLOWED_TYPES.includes(file.mimetype)) {
+  //     response
+  //       .status(400)
+  //       .send('<h1>File upload error</h1><p>Please upload an image file</p>');
+  //   }
+  //   // file.size tells us how big the file was (in bytes)
+  //   if (file.size > MAX_SIZE) {
+  //     response
+  //       .status(400)
+  //       .send('<h1>File upload error</h1><p>Profile picture must be < 5MB</p>');
+  //   } else {
+  auth
+    .createUser(name, email, password, avatar)
+    .then(auth.saveUserSession)
+    .then((sid) => {
+      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+      response.redirect('/');
+    })
+    .catch((error) => {
+      console.error(error);
+      response.send(buildPage(`Error`, `<h2>Couldn't sign up, sorry</h2>`));
+    });
 }
 module.exports = { get, post };
