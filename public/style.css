@@ -12,6 +12,10 @@ h1 {
   margin-bottom: 1rem;
 }
 
+h3 {
+  margin: 0.3rem;
+}
+
 section {
   text-align: center;
 }
@@ -30,9 +34,11 @@ button {
 
 a:visited {
   color: var(--dark-green);
+  background-color: var(--ivory);
 }
 
-a:hover {
+a:hover,
+button:hover {
   cursor: pointer;
   background-color: var(--dark-green);
   color: var(--ivory);
@@ -43,6 +49,13 @@ article {
   margin: auto;
   background-color: var(--green);
   color: black;
+  border-radius: 5px;
+}
+
+article > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 ul {
@@ -53,9 +66,13 @@ ul {
 li {
   background-color: var(--ivory);
   list-style: none;
-  margin: 1rem;
+  margin: 0.5rem;
   text-align: left;
-  padding: 0.5rem;
+  padding: 0.3rem;
+}
+
+p {
+  margin: 0.3rem;
 }
 
 form {
@@ -71,8 +88,9 @@ form {
 form > div {
   margin-top: 0.5rem;
 }
-p {
-  margin: 0.3rem;
+
+.gap {
+  margin: 2rem;
 }
 
 label {
