@@ -37,6 +37,14 @@ function getSession(sid) {
   });
 }
 
+function getRecipes() {
+  const GET_RECIPES = `
+  SELECT * FROM recipes 
+  `;
+  console.log('deleting recipe');
+  return db.query(GET_RECIPES).then((result) => result.rows);
+}
+
 function showRecipes() {
   const query = `SELECT 
   recipes.title, 
@@ -71,9 +79,21 @@ function updateUser(sessionEmail, name) {
     .then((result) => result.rows[0]);
 }
 
-function deleteUser(name) {
-  const DELETER = `DELETE from users WHERE users.name = $1;`;
-  return db.query(DELETER, [name]).then((result) => result.rows[0]);
+function deleteRecipe(recipeID, user_id) {
+  const DELETE_RECIPE = `DELETE FROM recipes WHERE id=$1 AND user_id=$2`;
+  return db.query(DELETE_RECIPE, [parseInt(recipeID, 10), user_id]);
+}
+
+/*function updateRecipe(sessionRecipe, name) {
+  const UPDATER = `UPDATE recipes SET name = $1 WHERE recipes.email = $2;`;
+  return db
+    .query(UPDATER, [name, sessionRecipe])
+    .then((result) => result.rows[0]);
+}*/
+
+function deleteUser(email) {
+  const DELETE_USER = `DELETE from users WHERE email = $1;`;
+  return db.query(DELETE_USER, [email]);
 }
 
 module.exports = {
@@ -86,4 +106,6 @@ module.exports = {
   showMyRecipes,
   updateUser,
   deleteUser,
+  deleteRecipe,
+  getRecipes,
 };

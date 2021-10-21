@@ -14,9 +14,9 @@ const logIn = require('./routes/logIn.js');
 const logOut = require('./routes/logOut.js');
 const recipeWrite = require('./routes/recipeWrite.js');
 const recipesMine = require('./routes/recipesMine.js');
-// const recipesAll = require('./routes/recipesAll.js');
-// const recipeDelete = require('./routes/recipeDelete.js');
-// const recipeEdit = require('./routes/recipeEdit.js');
+const recipesAll = require('./routes/recipesAll.js');
+//const recipeDelete = require('./routes/recipeDelete.js');
+//const recipeEdit = require('./routes/recipeEdit.js');
 const userDelete = require('./routes/userDelete.js');
 const userEdit = require('./routes/userEdit.js');
 
@@ -39,17 +39,17 @@ server.post('/recipeWrite', recipeWrite.post);
 
 // // upload.single('avatar'),
 
-// server.get('/recipesAll', recipesAll.get);
+server.get('/recipesAll', recipesAll.get);
 // server.post('/recipesAll', recipesAll.post);
 
 server.get('/recipesMine', recipesMine.get);
 // server.post('/recipesMine', recipesMine.post);
 
-// server.get('/recipeDelete', recipeDelete.get);
-// server.post('/recipeDelete, recipeDelete.post);
+//server.get('/recipeDelete', recipeDelete.get);
+//server.post('/recipeDelete', recipeDelete.post);
 
-// server.get('/recipeEdit', recipeEdit.get);
-// server.post('/recipeEdit', recipeEdit.post);
+//server.get('/recipeEdit', recipeEdit.get);
+//server.post('/recipeEdit', recipeEdit.post);
 
 server.post('/userDelete', userDelete.post);
 
