@@ -21,7 +21,7 @@ function get(request, response) {
     <p>Author: ${recipe.name}</p>
 	<p>Avatar: ${
     recipe.avatar
-      ? `<img src="/user/${recipe.id}/avatar" alt="" width="64" height="64">`
+      ? `<img src="/recipe/${recipe.id}/avatar" alt="" width="64" height="64">`
       : ""
   }</p>
     <ul>
@@ -71,7 +71,7 @@ function get(request, response) {
     .then((page) => response.send(buildPage(title, page)));
 }
 
-server.get("/user/:id/avatar", (req, res) => {
+server.get("/recipe/:id/avatar", (req, res) => {
   model.getAvatar(req.params.id).then((user) => {
     res.send(user.avatar);
   });

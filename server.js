@@ -62,7 +62,7 @@ const upload = multer();
 const MAX_SIZE = 1000 * 1000 * 5; // 5 megabytes
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 
-server.post("/", upload.single("avatar"), (request, response) => {
+server.post("/signUp", upload.single("avatar"), (request, response) => {
   const file = request.file;
   console.log(file.buffer);
   if (!ALLOWED_TYPES.includes(file.mimetype)) {
