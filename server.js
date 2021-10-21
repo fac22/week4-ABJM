@@ -35,13 +35,13 @@ server.get("/", home.get);
 server.post("/", upload.single("avatar"), (request, response) => {
   const file = request.file;
 
-  // file.mimetype tells us what kind of file it was
+  //file.mimetype tells us what kind of file it was
   if (!ALLOWED_TYPES.includes(file.mimetype)) {
     response
       .status(400)
       .send("<h1>File upload error</h1><p>Please upload an image file</p>");
   }
-  // file.size tells us how big the file was (in bytes)
+  //file.size tells us how big the file was (in bytes)
   if (file.size > MAX_SIZE) {
     response
       .status(400)

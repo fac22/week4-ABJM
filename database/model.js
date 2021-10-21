@@ -8,12 +8,14 @@ function getUser(email) {
 }
 
 function getAvatar(id) {
-  return db.query("SELECT avatar FROM users WHERE id=?", id);
+  return db
+    .query("SELECT avatar FROM users WHERE id=$1", [id])
+    .then((result) => result.rows[0]);
 }
 
 function createUser(name, email, hash, avatar) {
   const INSERT_USER = `INSERT INTO users (name, email, password, avatar) VALUES ($1, $2, $3, $4) 
-  RETURNING id, name, email;`;
+  RETURNING id, name, email, avatar;`;
   return db.query(INSERT_USER, [name, email, hash, avatar]).then((result) => {
     console.log("model.js:", avatar);
     return result.rows[0];
@@ -43,7 +45,7 @@ function getSession(sid) {
 
 function getUsers() {
   return db
-    .query("SELECT id, email, password, name, avatar FROM users")
+    .query(`SELECT id, email, password, name, avatar FROM users`)
     .then((result) => result.rows);
 }
 

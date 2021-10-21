@@ -7,7 +7,7 @@ CREATE TABLE users (
   email TEXT NOT NULL UNIQUE,
   name TEXT NOT NULL,
   password TEXT NOT NULL,
-  avatar BYTEA
+  avatar BYTEA NULL
   
 );
 
@@ -25,12 +25,12 @@ CREATE TABLE recipes (
    user_id INTEGER REFERENCES users(id)
 );
 
-INSERT INTO users ( email, name, password, avatar) VALUES
+INSERT INTO users (email, name, password, avatar) VALUES
 (
   'test@gmail.com',
   'Initial User',
   'Password123',
-  ''
+  pg_read_binary_file('/mnt/c/Users/micha/week4-ABJM/public/4-star-db-black.jpeg')
 );
 
 INSERT INTO sessions (sid, data) VALUES
