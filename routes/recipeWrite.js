@@ -107,9 +107,8 @@ function post(request, response) {
       // save title, ingredients, instructions, user_id in recipes
       .then((dbUser) => {
         saveRecipe(title, ingredients, instructions, dbUser.id);
-        // redirect where?
-        response.redirect('/');
       })
+      .then(() => response.redirect('/'))
       // catch errors
       .catch((error) => {
         console.error(error);
