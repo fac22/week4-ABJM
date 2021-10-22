@@ -31,7 +31,7 @@ function updateUser(sessionEmail, name) {
 
 function deleteUser(email) {
   const DELETE_USER = `DELETE from users WHERE email = $1;`;
-  return db.query(DELETE_USER, [email]).catch(console.warn);
+  return db.query(DELETE_USER, [email]);
 }
 
 // Sessions
