@@ -1,6 +1,6 @@
-const model = require('../database/model.js');
-const auth = require('../auth.js');
-const { buildPage } = require('../template.js');
+const model = require("../database/model.js");
+const auth = require("../auth.js");
+const { buildPage } = require("../template.js");
 
 function get(request, response) {
   // SELECT all FROM recipes where user_id= myID (sid -> getSession -> email -> users -> id)
@@ -14,10 +14,12 @@ function get(request, response) {
     })
     .then((userEmail) => model.showMyRecipes(userEmail))
     .then((data) => {
-      return data
-        .map(
-          (recipe) => /*html*/ `
-					<h1>My Recipes🍓🥕</hq>
+      return (
+        /*html*/ `<h1>My Recipes🍓🥕</h1>
+        <a href="/">Go Home</a>` +
+        data
+          .map(
+            (recipe) => /*html*/ `
             <article>
 						<div>
             <h2>${recipe.title}</h2>
@@ -28,17 +30,17 @@ function get(request, response) {
               <li class="bold">Ingredients
               <ul class="li-style">
               ${recipe.ingredients
-                .split(', ')
+                .split(", ")
                 .map((x) => `<li>${x}</li>`)
-                .join('')}
+                .join("")}
               </ul>
               </li>
               <li class="bold">Instructions 
               <ul class="li-style">
               ${recipe.instructions
-                .split('. ')
+                .split(". ")
                 .map((x) => `<li>${x}</li>`)
-                .join('')}
+                .join("")}
               </ul>
               </li>
             </ul>
@@ -46,11 +48,11 @@ function get(request, response) {
             </article>
             <form action="/recipeDelete" method="POST" class="form-no-style centre recipesMine-links" >
                 <button>Delete my recipe</button>
-								<a href="/">Go Home</a> 
             </form>
             `
-        )
-        .join('');
+          )
+          .join("")
+      );
     })
     .then((recipeList) => {
       const page = `${recipeList}`;
